@@ -1,7 +1,7 @@
 <?php 
 	
 	
-	const BASE_URL = "http://localhost/trabajos/icam";
+	const BASE_URL = "http://devstec.digital";
 
 	//Zona horaria
 	date_default_timezone_set('America/Bogota');
