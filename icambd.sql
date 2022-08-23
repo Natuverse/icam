@@ -81,3 +81,20 @@ foreign key (rolid) references rol (idrol)
 
 INSERT INTO `usuario` (`idusuario`, `fechad_creacion`, `nombres`, `apellidos`,  `pass`, `correo`, `telefono`, `celular`,  `rolid`, `status`) 
 VALUES (1, '8/8/2022', 'Julio Cesar', 'Leon Martinez',  '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 'jcleon892@gmail.com', '6056208', '3105890481',  1, 1);
+
+
+create table usuariobot(
+idusuariobot bigint not null auto_increment,
+primary key (idusuariobot),
+nombre varchar (50),
+tipo int 
+);
+
+create table conversacion(
+idconversacion bigint not null auto_increment,
+primary key (idconversacion),
+idusuario bigint,
+conversacion longtext,
+tiempo datetime DEFAULT CURRENT_TIMESTAMP,
+idmodelo bigint 
+);
