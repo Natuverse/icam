@@ -8,7 +8,7 @@
         private $sttMensaje;
         private $idWebcam;
 		private $intprivate;
-		private $intvoice
+		private $intvoice;
 
         
 		public function __construct()
@@ -54,11 +54,11 @@
             $this->idWebcam = $webCam;
 			$this->intprivate= $private;
 			$this->intvoice = $voice;
-
+		
 		
 			
 		    $query_insert  = "INSERT INTO conversacion(idusuario, conversacion, idmodelo, privado, voz)
-				VALUES(?,?,?)";
+				VALUES(?,?,?,?,?)";
 				$arrData = array(
 					$this->intIdUser,
 					$this->sttMensaje,

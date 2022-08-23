@@ -34,29 +34,19 @@ class Icam extends Controllers
                 $message  =  strClean($_POST['message']);
                 $webCam  =  strClean($_POST['webCam']);
                 $private =  intval($_POST['private']);
-                $voice = intval($_POST['voice']);
-
-                if(empty($_POST[$_POST['private']])){
-                    $private=0;
-                }else{
-                    $private =  intval($_POST['private']);
-                }
-
-                if(empty($_POST[$_POST['voice']])){
-                    $voice=0;
-                }else{
-                    $voice =  intval($_POST['voice']);
-                }
-
-                $iduser   = $this->model->consultarUsuario($user, $type, $private, $voice);
+                $voice =  intval($_POST['voice']);
+           
+           
+                $iduser   = $this->model->consultarUsuario($user, $type);
                 $idwebcam =0;
                 if( $type ==2){
-                    $idwebcam   = $this->model->consultarUsuario($webCam, $type, $private, $voice);
+                    $idwebcam   = $this->model->consultarUsuario($webCam, $type);
                 }
 
-    
-
-                $requestConversacion = $this->model->InsertConversacional($iduser, $message, $idwebcam);
+               
+             
+                $requestConversacion = $this->model->InsertConversacional($iduser, $message, $idwebcam, $private, $voice);
+           
                 if(!empty($requestConversacion)){
                     $arrResponse = array('status' => true, 'msg' => 'ok' ); 
                 }else{
