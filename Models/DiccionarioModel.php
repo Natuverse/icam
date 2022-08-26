@@ -100,6 +100,16 @@
             $request = $this->select($sql);
             return $request;
         }
+
+        public function deletePalabra(int $iddiccionario){
+            $this->intiddiccionario  = $iddiccionario;
+
+            $query  = "DELETE FROM diccionario 
+            WHERE iddiccionario = $this->intiddiccionario";
+
+            $request_delete = $this->delete($query);
+            return $request_delete;
+        }
      
 
     }

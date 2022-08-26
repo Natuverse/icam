@@ -54,6 +54,9 @@ class Diccionario extends Controllers
                     $btnEdit = '<button class="btn btn-primary btn-sm " onClick="fntEditInfo(this,' . $arrData[$i]['iddiccionario'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
             
+                if($_SESSION['permisosMod']['d']){	
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['iddiccionario'].')" title="Eliminar producto"><i class="far fa-trash-alt"></i></button>';
+                }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
@@ -126,14 +129,14 @@ class Diccionario extends Controllers
 
 				if ($request > 0) {
 					if ($option == 1) {
-						$arrResponse = array('status' => true,  'iddiccionario' => $request, 'image'=>$imgimage, 'msg' => 'Datos guardados correctamente.');
+						$arrResponse = array('status' => true, 'palabra'=>$palabra, 'significado_en'=>$significado_en, 'traduccion_es'=>$traduccion_es, 'significado_es'=> $significado_es,'iddiccionario' => $request, 'image'=>$imgimage, 'msg' => 'Datos guardados correctamente.');
 						if ($nombre_image != '') {
 							uploadImage($image, $imgimage, $folderimage);
 						}
 					
 				
 					} else {
-						$arrResponse = array('status' => true, 'iddiccionario' => $iddiccionario, 'image'=>$imgimage, 'msg' => 'Datos Actualizados correctamente.');
+						$arrResponse = array('status' => true,'palabra'=>$palabra, 'significado_en'=>$significado_en, 'traduccion_es'=>$traduccion_es, 'significado_es'=> $significado_es, 'iddiccionario' => $iddiccionario, 'image'=>$imgimage, 'msg' => 'Datos Actualizados correctamente.');
 						if ($nombre_image != '') {
 							uploadImage($image, $imgimage, $folderimage);
 						}
@@ -196,4 +199,22 @@ class Diccionario extends Controllers
 	
 			die();
 		}
+
+
+     public function delPalanbra(){
+        if($_POST){
+            if($_SESSION['permisosMod']['d']){
+                $iddiccionario = intval($_POST['iddiccionario']);
+                $requestDelete = $this->model->deletePalabra($iddiccionario);
+                if($requestDelete)
+                {
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la palabra');
+                }else{
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la palabra.');
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            }
+        }
+        die();
+     } 
 }

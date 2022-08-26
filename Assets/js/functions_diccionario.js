@@ -131,10 +131,26 @@ document.addEventListener("DOMContentLoaded", function() {
                       document.querySelector("#image_actual").value = objData.image;
                       document.querySelector("#image_remove").value =0;
 
+
+                      if(rowTable == ""){
+                        tableDiccionario.api().ajax.reload();
+                    }else{
+                        
+                        $url ="<img src='https://devstec.digital/Assets/images/uploads/diccionario/"+objData.image+"' class='rounded-circle  rounded' width='50px' height='50px' alt=''>";
+                        
+                        
+                        rowTable.cells[0].textContent = objData.iddiccionario;
+                        rowTable.cells[1].innerHTML =  $url
+                        rowTable.cells[2].textContent = objData.palabra;
+                        rowTable.cells[3].textContent = objData.significado_en;
+                        rowTable.cells[4].innerHTML = objData.traduccion_es;
+                        rowTable.cells[5].innerHTML = objData.significado_es;
+                        rowTable = ""; 
+                    }
   
                       Swal.fire("", objData.msg, "success");
   
-                      tableDiccionario.api().ajax.reload();
+                      
                       $("#modalDiccionario").modal("hide");
                       cerrarModal();
                       // $('#modalFormUsuario').modal("hide");
@@ -253,4 +269,46 @@ function removePhotos() {
            document.querySelector("#imgregistro").remove();
        }
        $("#image_remove").val(1);
+}
+
+
+function fntDelInfo(iddiccionario){
+
+    Swal.fire({
+        title: "Eliminar Palabra",
+        text: "¿Realmente quiere eliminar la palabra?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/diccionario/delPalanbra';
+            let strData = "iddiccionario="+iddiccionario;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        Swal.fire("Eliminar!", objData.msg, "success");
+                       
+                        tableDiccionario.api().ajax.reload();
+                    }else{
+                        Swal.fire("Atención!", objData.msg, "success");
+                        
+                    }
+                }
+            }
+        } 
+      })
+
+
+ 
 }
