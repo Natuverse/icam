@@ -2,7 +2,7 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <?php if (!empty($_SESSION['permisos'][MUSUARIOS]['r'])) {
+                <?php if (!empty($_SESSION['permisos'][MDASHBOARD]['r'])) {
             ?>
                 <div class="sb-sidenav-menu-heading">ICAM</div>
                 <a class="nav-link" href="<?= base_url(); ?>/dashboard">
@@ -29,7 +29,7 @@
                         <?php } ?>
                     </nav>
                 </div>
-                <?php }   if (!empty($_SESSION['permisos'][MUSUARIOS]['r'])) {
+                <?php }   if (!empty($_SESSION['permisos'][MDICCIONARIO]['r'])) {
             ?>
                 <div class="sb-sidenav-menu-heading">DICCIONARIO</div>
                 <a class="nav-link" href="<?= base_url(); ?>/diccionario">
