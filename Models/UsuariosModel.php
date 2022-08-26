@@ -36,7 +36,7 @@
         $this->introlid  = $rolid;    
         $return = 0;
         $sql = "SELECT * FROM usuario WHERE 
-            email = '{$this->srtcorreo}' or celular = '{$this->srtcelular}' ";
+            correo = '{$this->srtcorreo}' or celular = '{$this->srtcelular}' ";
         $request = $this->select_all($sql);
         if (empty($request)) {
 
