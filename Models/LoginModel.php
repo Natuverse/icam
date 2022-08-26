@@ -15,13 +15,17 @@
 
 		public function loginUser(string $email, string $password)
 		{
+
 			$this->strEmail = $email;
 			$this->strPassword = $password;
+			
 			$sql = "SELECT idusuario, status FROM usuario WHERE 
-					email = '$this->strEmail' and 
+					correo = '$this->strEmail' and 
 					pass = '$this->strPassword' and 
-					status != 0 ";
+					status != 0 ";	
+							
 			$request = $this->select($sql);
+			
 			return $request;
 		}
 
@@ -32,7 +36,7 @@
 							p.nombres,
 							p.apellidos,						
                             p.celular,
-							p.email,
+							p.correo,
 							p.rolid,r.nombrerol,
 							p.status 
 					FROM usuario p
@@ -47,7 +51,7 @@
 		public function getUserEmail(string $strEmail){
 			$this->strEmail = $strEmail;
 			$sql = "SELECT idusuario,nombres,apellidos,status FROM usuario WHERE 
-					email = '$this->strEmail' and  
+					correo = '$this->strEmail' and  
 					status = 1 ";
 			$request = $this->select($sql);
 			return $request;
@@ -66,7 +70,7 @@
 			$this->strEmail = $email;
 			$this->strToken = $token;
 			$sql = "SELECT idusuario FROM usuario WHERE 
-					email = '$this->strEmail' and 
+					correo = '$this->strEmail' and 
 					token = '$this->strToken' and 					
 					status = 1 ";
 			$request = $this->select($sql);

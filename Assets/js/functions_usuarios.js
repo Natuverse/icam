@@ -272,7 +272,7 @@ function fntEditInfo(element, idusuario) {
 
                 document.querySelector("#telefono_movil").value = objusaurio.celular;
 
-                document.querySelector("#correo").value = objusaurio.email;
+                document.querySelector("#correo").value = objusaurio.correo;
 
                 document.querySelector("#rol_form").value = objusaurio.idrol;
 
@@ -377,7 +377,7 @@ function fntEditInfoDetalle(idusuario) {
                 document.querySelector("#telefono_movilinfo").value =
                     objusaurio.celular;
 
-                document.querySelector("#correoinfo").value = objusaurio.email;
+                document.querySelector("#correoinfo").value = objusaurio.correo;
 
                 document.querySelector("#rol_forminfo").value = objusaurio.nombrerol;
 

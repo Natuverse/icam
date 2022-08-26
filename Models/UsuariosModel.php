@@ -19,7 +19,7 @@
 
 		public function getusuarios(){
 			//EXTRAE conductores
-			$sql = "SELECT u.idusuario, u.avatar, u.nombres, u.apellidos, u.celular, u.email, u.rolid, u.status, r.idrol, r.nombrerol, r.descripcion FROM  usuario as u 
+			$sql = "SELECT u.idusuario, u.avatar, u.nombres, u.apellidos, u.celular, u.correo, u.rolid, u.status, r.idrol, r.nombrerol, r.descripcion FROM  usuario as u 
 			left join rol as r on u.rolid = r.idrol		
 			where u.rolid != 5 ";
 			$request = $this->select_all($sql);
@@ -40,7 +40,7 @@
         $request = $this->select_all($sql);
         if (empty($request)) {
 
-            $query_insert  = "INSERT INTO usuario(avatar, pass,nombres, apellidos,  celular, email, rolid )VALUES(?,?,?,?,?,?,?)";
+            $query_insert  = "INSERT INTO usuario(avatar, pass,nombres, apellidos,  celular, correo, rolid )VALUES(?,?,?,?,?,?,?)";
             $arrData = array(
                 $this->srtavatar,              
                 $this->srtpass,             
@@ -67,11 +67,11 @@
     $this->srtcorreo  = $correo;   
     $this->introlid  = $rolid;
     $return = 0;
-    $sql = "SELECT * FROM usuario WHERE (email = '{$this->srtcorreo}' or celular = '{$this->srtcelular}')  AND idusuario != $this->intidusuario";
+    $sql = "SELECT * FROM usuario WHERE (correo = '{$this->srtcorreo}' or celular = '{$this->srtcelular}')  AND idusuario != $this->intidusuario";
     $request = $this->select_all($sql);
     if (empty($request)) {
 
-        $sql = "UPDATE usuario SET avatar =?, nombres=?, apellidos=?, celular=?,  email=?,  rolid=? WHERE idusuario = $this->intidusuario  ";
+        $sql = "UPDATE usuario SET avatar =?, nombres=?, apellidos=?, celular=?,  correo=?,  rolid=? WHERE idusuario = $this->intidusuario  ";
         $arrData = array(
             $this->srtavatar,          
             $this->srtnombres,
@@ -107,7 +107,7 @@
         $this->intidusuario  = $idusuario;
 
         $sql = "SELECT 
-        u.idusuario, u.avatar,  u.nombres, u.apellidos, u.celular,  u.email, r.idrol, r.nombrerol, u.status
+        u.idusuario, u.avatar,  u.nombres, u.apellidos, u.celular,  u.correo, r.idrol, r.nombrerol, u.status
         FROM  usuario as u 
         left join rol as r on u.rolid = r.idrol  
         where u.idusuario = $this->intidusuario";

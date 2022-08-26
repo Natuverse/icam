@@ -15,8 +15,8 @@
 
 		public function login()
 		{
-			$data['page_tag'] = "Login - Mi mentor pro";
-			$data['page_title'] = "Mi mentor pro";
+			$data['page_tag'] = "Login -ICAM";
+			$data['page_title'] = "ICAM";
 			$data['page_name'] = "login";
 			$data['page_functions_js'] = "functions_login.js";
 			$this->views->getView($this,"login",$data);
@@ -25,13 +25,14 @@
 		public function loginUser(){
 			//dep($_POST);die;
 			if($_POST){
-				if(empty($_POST['txtemail']) || empty($_POST['txtemail'])){
+				if(empty($_POST['txtemail']) || empty($_POST['txtPassword'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
 				}else{
 					$strUsuario  =  strClean($_POST['txtemail']);
 					$strPassword = hash("sha512",$_POST['txtPassword']);
-					
+					//dep($_POST);die;
 					$requestUser = $this->model->loginUser($strUsuario, $strPassword);
+					
 					if(empty($requestUser)){
 						$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecto.' ); 
 					}else{

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - Mi mentor pro</title>
+    <title>Dashboard - ICAM</title>
     <link href="<?= media(); ?>/css/style.css" rel="stylesheet" />
     <link href="<?= media(); ?>/css/styles.css" rel="stylesheet">
     <link href="<?= media(); ?>/css/app.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     </div>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="#">Mi mentor pro</a>
+        <a class="navbar-brand ps-3" href="#">ICAM</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>

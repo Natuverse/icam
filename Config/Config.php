@@ -1,7 +1,7 @@
 <?php 
 	
 	
-	const BASE_URL = "http://devstec.digital";
+	const BASE_URL = "https://devstec.digital";
 
 	//Zona horaria
 	date_default_timezone_set('America/Bogota');
@@ -23,6 +23,7 @@
 		const MDASHBOARD = 1;
 		const MROLES= 2;
 		const MUSUARIOS = 3;
+		const MDICCIONARIO =4;
 		
 
 

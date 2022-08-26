@@ -9,6 +9,7 @@
         private $idWebcam;
 		private $intprivate;
 		private $intvoice;
+		private $srtword;
 
         
 		public function __construct()
@@ -72,6 +73,19 @@
 				$return = $request_insert;
 			
 			return $return;
+			
+		}
+
+		public function consultDiccionario( String $word){			
+
+			$this->srtword = $word;
+			$sql = "SELECT * FROM diccionario  
+			WHERE palabra = '$this->srtword' ";
+			
+			
+				$request = $this->select_all($sql);
+				
+			return $request;
 			
 		}
 
