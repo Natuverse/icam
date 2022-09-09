@@ -1,16 +1,16 @@
 <?php 
 	
 	
-	const BASE_URL = "http://localhost/trabajos/icam";
+	const BASE_URL = "http://172.33.5.252/icam";
 
 	//Zona horaria
 	date_default_timezone_set('America/Bogota');
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "icam";
+	const DB_NAME = "u229691282_icam";
 	const DB_USER = "root";
-	const DB_PASSWORD = "";
+	const DB_PASSWORD = "devstech";
 	const DB_CHARSET = "utf8";
 
 		//Deliminadores decimal y millar Ej. 24,1989.00

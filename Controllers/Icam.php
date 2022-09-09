@@ -70,13 +70,59 @@ class Icam extends Controllers
             }else{
               
                 $message  =  strClean($_POST['message']);
-      
+
+                $params=['message'=>  $message];
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.68:5000',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch = curl_init();
+                curl_setopt_array($ch, $defaults);
+
+                $result2 = curl_exec($ch);
+
+                curl_close($ch);
+                //$str = substr($result, 1, -1);
+                //print_r($result);
+
+
+                $array = json_decode($result2, true);
+                //print_r($array);
+
+                $array = $array[0];
+
+
+                $aux=0;
+                $max=0;
+
+                for($i=0; $i<count($array); $i++){
+
+                    if($array[$i]['score']>$aux){
+                        $aux =$array[$i]['score'];
+                        $max = $i;
+                    }
+                }
+
+                $max++;
+
+                $arrSentimiento = $this->model->consultarEmociones($max);
+
+                $sent= rand(0, count($arrSentimiento));
+
+
+
+
+
+
+              
+
                 $words = explode(" ", $message);
                 $result = [];
 
                 $html= '<div id="btnClose"></div>
                 <div class="titleBar">
-                    <div id="nameUser" class="bigTitle">JCLEON</div>
                     <div id="preferences">
                         <span>BDSM</span> | <span>Feet</span> | <span>Lesbian</span>
                     </div>
@@ -137,7 +183,7 @@ class Icam extends Controllers
                 
                 $html.='</p>
                 <div class="toRight">
-                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconEnglish.png" title="English" />
+                    <img class="iconLanguage" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="English" />
                 </div>
             </div>
         </div>

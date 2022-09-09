@@ -10,6 +10,7 @@
 		private $intprivate;
 		private $intvoice;
 		private $srtword;
+		private $intId_emocion;
 
         
 		public function __construct()
@@ -87,6 +88,18 @@
 				
 			return $request;
 			
+		}
+
+		public function consultarEmociones(int $id_emocion){
+			$this->intId_emocion = $id_emocion;
+
+			$sql = "SELECT * FROM emocion_image  
+			WHERE id_emocion = $this->intId_emocion ";
+			
+			
+				$request = $this->select_all($sql);
+				
+			return $request;
 		}
 
         
