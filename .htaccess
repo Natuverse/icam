@@ -1,6 +1,14 @@
+Options +ExecCGI
+AddHandler cgi-script .py
 Options All -Indexes
 RewriteEngine on
+
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+php_value upload_max_filesize 20M
+php_value post_max_size 20M
+php_value max_execution_time 9999
+php_value max_input_time 9999

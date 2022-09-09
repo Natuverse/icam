@@ -36,6 +36,41 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Diccionario
                 </a>
+                <?php } if (!empty($_SESSION['permisos'][MANALISIS]['r'])) {
+            ?>
+                <div class="sb-sidenav-menu-heading">Analisis</div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAnalisis"
+                    aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Analisis
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseAnalisis" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis">Palabras</a>
+                        <?php if (!empty($_SESSION['permisos'][MANALISIS]['r'])) {
+            ?>
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis/oraciones">Oraciones</a>
+                        <?php } ?>
+                    </nav>
+                </div>
+                <?php } if (!empty($_SESSION['permisos'][MEMOCIONES]['r'])) {
+            ?>
+                <div class="sb-sidenav-menu-heading">Emociones</div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmociones"
+                    aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Emociones
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseEmociones" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="<?= base_url(); ?>/emocion">Emociones</a>
+                        
+                    </nav>
+                </div>
                 <?php } ?>
             </div>
         </div>
