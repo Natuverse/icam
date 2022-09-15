@@ -34,16 +34,13 @@ class Icam extends Controllers
                 $message  =  strClean($_POST['message']);
                 $webCam  =  strClean($_POST['webCam']);
                 $private =  intval($_POST['private']);
-                $voice =  intval($_POST['voice']);
-           
+                $voice =  intval($_POST['voice']);          
            
                 $iduser   = $this->model->consultarUsuario($user, $type);
                 $idwebcam =0;
                 if( $type ==2){
                     $idwebcam   = $this->model->consultarUsuario($webCam, $type);
-                }
-
-               
+                }               
              
                 $requestConversacion = $this->model->InsertConversacional($iduser, $message, $idwebcam, $private, $voice);
            
@@ -73,7 +70,7 @@ class Icam extends Controllers
 
                 $params=['message'=>  $message];
                 $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.68:5000',
+                CURLOPT_URL => 'http://192.168.1.254:5000',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => $params,
@@ -91,8 +88,10 @@ class Icam extends Controllers
                 $array = json_decode($result2, true);
                 //print_r($array);
 
-                $array = $array[0];
-
+               
+                $words2 =  $array['traduccion']['text'];
+                //dep($array);
+                $array = $array['sentimiento'][0];
 
                 $aux=0;
                 $max=0;
@@ -108,6 +107,7 @@ class Icam extends Controllers
                 $max++;
 
                 $arrSentimiento = $this->model->consultarEmociones($max);
+               
 
                 $sent= rand(0, count($arrSentimiento));
 
@@ -163,7 +163,9 @@ class Icam extends Controllers
             <div class="box">
                 <div class="titleTag">ORIGINAL</div>        
                 <p id="textEnglish">';
-                foreach($words as $word){
+
+               // $worda2 =  $array['traduccion']['text']
+                foreach($words2 as $word){
                     $request =0;
                     $request = $this->model->consultDiccionario($word);
                     //Consultar base de datos
@@ -183,13 +185,14 @@ class Icam extends Controllers
                 
                 $html.='</p>
                 <div class="toRight">
-                    <img class="iconLanguage" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="English" />
+                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconEnglish.png" title="English" />
                 </div>
             </div>
         </div>
 
         <div class="flex1">
-            <img id="imageExpression" src="https://creamox.com/images_icam/bdsm.jpg" />
+        
+            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['id_emocion'].'" />
         </div>
         
     </div>

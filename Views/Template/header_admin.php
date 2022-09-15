@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="https://laquesie.com/images/logoPerfil500.png">
+    <link rel="shortcut icon" href="<?= media();?>/images/iconicam.ico">
     <title>Dashboard - ICAM</title>
     <link href="<?= media(); ?>/css/style.css" rel="stylesheet" />
     <link href="<?= media(); ?>/css/styles.css" rel="stylesheet">
