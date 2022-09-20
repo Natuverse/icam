@@ -111,60 +111,109 @@ class Icam extends Controllers
 
                 $sent= rand(0, count($arrSentimiento));
 
+               
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.254:8080/interact',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch2 = curl_init();
+                curl_setopt_array($ch2, $defaults);
+
+                $result3 = curl_exec($ch2);
+                curl_close($ch2);
+                //$str = substr($result, 1, -1);
+                //print_r($result);
 
 
+                $array2 = json_decode($result3, true);
+               
+               
+                $params=['message'=>  $array2['text']];
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.254:5000',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch = curl_init();
+                curl_setopt_array($ch, $defaults);
+
+                $resultes1 = curl_exec($ch);
+
+                curl_close($ch);
+                //$str = substr($result, 1, -1);
+                //print_r($result);
 
 
+                $arrayEs2 = json_decode($resultes1, true);
+                $textEsF = $arrayEs2['traduccion']['text'];
 
+                /////////////////////////////////
+
+                $params=['message'=>   $array2['beam_texts'][0][0]];
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.254:5000',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch = curl_init();
+                curl_setopt_array($ch, $defaults);
+
+                $resultes2 = curl_exec($ch);
+
+                curl_close($ch);
+                //$str = substr($result, 1, -1);
+                //print_r($result);
+
+
+                $arrayEs2 = json_decode($resultes2, true);
+                $textEsF1 = $arrayEs2['traduccion']['text'];
+
+                ////////////////////////////////////////////
+                $params=['message'=>   $array2['beam_texts'][1][0]];
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.254:5000',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch = curl_init();
+                curl_setopt_array($ch, $defaults);
+
+                $resultes3 = curl_exec($ch);
+
+                curl_close($ch);
+                //$str = substr($result, 1, -1);
+                //print_r($result);
+
+
+                $arrayEs3 = json_decode($resultes3, true);
+                $textEsF2 = $arrayEs3['traduccion']['text'];
               
 
                 $words = explode(" ", $message);
+                $words2 = explode(" ", $words2);
+                //$words2  =  strClean($words2);
                 $result = [];
 
                 $html= '<div id="btnClose"></div>
                 <div class="titleBar">
+                    <div id="nameUser" class="bigTitle">JCLEON</div>
                     <div id="preferences">
-                        <span>BDSM</span> | <span>Feet</span> | <span>Lesbian</span>
+                        
                     </div>
                 </div>
                 <br>
                 <div class="flexH">
                     <div class="flex2">
                         <div class="box">
+                      
                             <div class="titleTag">TRASLATE</div>
                             <p id="testSpanish">';
-
-                foreach($words as $word){
-                    $request =0;
-                    $request = $this->model->consultDiccionario($word);
-                    //Consultar base de datos
-                    // $dts es la respuesta de la consulta
-                 
-            
-
-                    if(sizeof($request) > 0 ){
-                        $html.='<span class="link" data-image="" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
-
-                    }else{
-                        $html.=$word." ";
-                    }
-
-                                       
-                   
-                }
-
-                $html.=' </p>
-                <div class="toRight">
-                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconSpanish.png" title="Spanish" />
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="box">
-                <div class="titleTag">ORIGINAL</div>        
-                <p id="textEnglish">';
-
-               // $worda2 =  $array['traduccion']['text']
+                         
                 foreach($words2 as $word){
                     $request =0;
                     $request = $this->model->consultDiccionario($word);
@@ -174,7 +223,41 @@ class Icam extends Controllers
             
 
                     if(sizeof($request) > 0 ){
-                        $html.='<span class="link" data-image="" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
+                        $html.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
+
+                    }else{
+                        $html.=$word." ";
+                    }
+
+                                       
+                   
+                }
+             
+                $html.=' </p>
+                <div class="toRight">
+                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconSpanish.png" title="Spanish" />
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="box">
+                
+                <div class="titleTag">ORIGINAL</div>        
+                <p id="textEnglish">';
+
+               // $worda2 =  $array['traduccion']['text']
+
+              
+                foreach($words as $word){
+                    $request =0;
+                    $request = $this->model->consultDiccionario($word);
+                    //Consultar base de datos
+                    // $dts es la respuesta de la consulta
+                 
+            
+
+                    if(sizeof($request) > 0 ){
+                        $html.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
 
                     }else{
                         $html.=$word." ";
@@ -200,35 +283,35 @@ class Icam extends Controllers
     <div id="answers">
         <div class="itemAnswer">
             <div class="text">
-                Por supuesto bebé estaré encantada de mostrarte en pvt
+                '.$textEsF.'
             </div>
             <br>
             <div class="titleGreen">
-                Off course baby i ll be happy to show you on pvt
+               '.$array2['text'].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text="Off course baby i ll be happy to show you on pvt" title="Send"/>
+            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text="'.$array2['text'].'" title="Send"/>
         </div>
 
         <div class="itemAnswer">
             <div class="text">
-                Si me gustaría ser azotada, vamos a pvt
+               '.$textEsF1.'
             </div>
             <br>
             <div class="titleGreen">
-                Yes i like to be spanked, let s go pvt
+                '.$array2['beam_texts'][0][0].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text="Yes i like to be spanked, let s go pvt" title="Send"/>
+            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text=" '.$array2['beam_texts'][0][0].'" title="Send"/>
         </div>
 
         <div class="itemAnswer">
             <div class="text">
-                Realmente me excita ser sádica, déjame mostrarte en pvt
+               '.$textEsF2 .'
             </div>
             <br>
             <div class="titleGreen">
-                it really turns me on to be sadistic, let me show you
+            '.$array2['beam_texts'][1][0].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text="it really turns me on to be sadistic, let me show you" title="Send"/>
+            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text=" '.$array2['beam_texts'][1][0].'" title="Send"/>
         </div>
     </div>';
 

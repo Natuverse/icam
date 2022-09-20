@@ -4,7 +4,7 @@ $message  = "hello baby";
 
 $params=['message'=>  $message];
 $defaults = array(
-CURLOPT_URL => 'http://192.168.1.254:5000',
+CURLOPT_URL => 'http://192.168.1.254:8080/interact',
 CURLOPT_RETURNTRANSFER => true,
 CURLOPT_POST => true,
 CURLOPT_POSTFIELDS => $params,
@@ -20,6 +20,6 @@ curl_close($ch);
 
 $array = json_decode($result2, true);
 
-print_r($array['traduccion']['text']);
+print_r($array['beam_texts'][0][0]);
 
 ?>
