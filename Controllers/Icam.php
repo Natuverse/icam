@@ -235,7 +235,7 @@ class Icam extends Controllers
              
                 $html.=' </p>
                 <div class="toRight">
-                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconSpanish.png" title="Spanish" />
+                    <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
                 </div>
             </div>
             <br>
@@ -268,7 +268,7 @@ class Icam extends Controllers
                 
                 $html.='</p>
                 <div class="toRight">
-                    <img class="iconLanguage" src="https://creamox.com/images_icam/iconEnglish.png" title="English" />
+                    <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
                 </div>
             </div>
         </div>
@@ -289,7 +289,7 @@ class Icam extends Controllers
             <div class="titleGreen">
                '.$array2['text'].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text="'.$array2['text'].'" title="Send"/>
+            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$array2['text'].'" title="Send"/>
         </div>
 
         <div class="itemAnswer">
@@ -300,7 +300,7 @@ class Icam extends Controllers
             <div class="titleGreen">
                 '.$array2['beam_texts'][0][0].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text=" '.$array2['beam_texts'][0][0].'" title="Send"/>
+            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text=" '.$array2['beam_texts'][0][0].'" title="Send"/>
         </div>
 
         <div class="itemAnswer">
@@ -311,7 +311,7 @@ class Icam extends Controllers
             <div class="titleGreen">
             '.$array2['beam_texts'][1][0].'
             </div>
-            <img class="iconSend" src="https://creamox.com/images_icam/btn-send.png" data-text=" '.$array2['beam_texts'][1][0].'" title="Send"/>
+            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text=" '.$array2['beam_texts'][1][0].'" title="Send"/>
         </div>
     </div>';
 
