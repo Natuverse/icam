@@ -66,6 +66,7 @@ class Icam extends Controllers
                 $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
             }else{
               
+              
                 $message  =  strClean($_POST['message']);
 
                 $params=['message'=>  $message];
@@ -77,25 +78,26 @@ class Icam extends Controllers
                 );
                 $ch = curl_init();
                 curl_setopt_array($ch, $defaults);
-
+            
                 $result2 = curl_exec($ch);
 
                 curl_close($ch);
                 //$str = substr($result, 1, -1);
                 //print_r($result);
-
-
+             
+              
                 $array = json_decode($result2, true);
                 //print_r($array);
 
-               
+              
                 $words2 =  $array['traduccion']['text'];
                 //dep($array);
                 $array = $array['sentimiento'][0];
-
+               
+               
                 $aux=0;
                 $max=0;
-
+              
                 for($i=0; $i<count($array); $i++){
 
                     if($array[$i]['score']>$aux){
@@ -105,6 +107,8 @@ class Icam extends Controllers
                 }
 
                 $max++;
+               
+               
 
                 $arrSentimiento = $this->model->consultarEmociones($max);
                
