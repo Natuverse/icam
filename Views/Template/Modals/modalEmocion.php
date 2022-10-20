@@ -41,7 +41,7 @@
                                                         <option value="1">sadness</option>
                                                         <option value="2">joy</option>
                                                         <option value="3">love</option>
-                                                        <option value="4">anger</option>
+                                                        <option value="4">sex</option>
                                                         <option value="5">fear</option>
                                                         <option value="6">surprise</option>
                                                     </select>
@@ -50,7 +50,15 @@
 
 
                                     </div>
+                                    <div class="mb-3 p-0 row">
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="descripcion">DESCRIPCION: </label>
+                                                <input type="text" name="descripcion" id="descripcion" class="form-control " placeholder="descripcion" required>
+                                            </div>
+                                       
 
+
+                                    </div>
                                  
 
                                 </div>

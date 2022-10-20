@@ -29,6 +29,7 @@ getModal('modalEmocion', $data);
 									<th>Id</th>
 									<th>Imagen</th>
                                     <th>Emocion</th>
+									<th>Descripcion</th>
 									<th style="width:180px">Acciones</th>
 								</tr>
 							</thead>

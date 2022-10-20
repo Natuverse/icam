@@ -38,6 +38,7 @@ class Emocion extends Controllers
 
 				$idemocion = intval($_POST['idemocion']);
 				$emocion = intval($_POST['emocion']);
+				$descripcion = strClean($_POST['descripcion']);
 				
 				//dep($_FILES['fotoRegistro']);
 			
@@ -60,7 +61,8 @@ class Emocion extends Controllers
 					if ($_SESSION['permisosMod']['w']) {
 						$request = $this->model->insertEmocion(						
 							$emocion,
-							$imgimage
+							$imgimage,
+							$descripcion
 						);
 					}
 
@@ -78,7 +80,9 @@ class Emocion extends Controllers
 						$request = $this->model->updateEmocion(
 							$idemocion,  
 							$emocion,
-							$imgimage			
+							$imgimage,
+							$descripcion	
+
 						);
 
 						$arr=$arrData = $this->model->getEmocion($idemocion);
@@ -102,7 +106,7 @@ class Emocion extends Controllers
 							uploadImage($image, $imgimage, $folderimage);
 						}
 						if (($nombre_image == '' && $_POST['image_remove'] == 1 && $_POST['image_actual'] != 'default-image.png')
-							|| ($nombre_image != '' && $_POST['image_actual'] != 'default-image.png')
+							|| ($nombre_image != '' && $_POST['image_actual'] != 'default-image.png'  )
 						) {
 							deleteFile($_POST['image_actual'], $folderimage);
 						}
@@ -168,7 +172,7 @@ class Emocion extends Controllers
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 				} else {
 
-					if (file_exists("./Assets/images/uploads/emocion/" . $arrData['emocion_image']) && $arrData['emocion_image'] != "") {
+					if (file_exists("./Assets/images/uploads/emocion/" . $arrData['emocion_image']) ) {
 						$arrData['url_image'] = media() . "/images/uploads/emocion/" . $arrData['emocion_image'];
 						$arrData['image_exite'] = true;
 					} else {

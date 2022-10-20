@@ -46102,22 +46102,24 @@ status int default 1
 create table emocion(
 idemocion int not null auto_increment,
 primary key(idemocion),
-emocion varchar (50)
+emocion varchar (50), 
+emocion_es varchar (50)
 );
 
-insert into emocion (idemocion, emocion) values
-(1,"sadness"),
-(2, "joy"),
-(3, "love"),
-(4, "anger"),
-(5, "fear"),
-(6, "surprise");
+insert into emocion (idemocion, emocion, emocion_es) values
+(1,"sadness", "sadness"),
+(2, "joy", "alegría"),
+(3, "love", "amor"),
+(4, "anger", "enfado"),
+(5, "fear", "miedo"),
+(6, "surprise", "sorpresa");
 
 create table emocion_image(
 idemocion_image int not null auto_increment,
 primary key (idemocion_image),
 emocion_image varchar (255),
-id_emocion int
+id_emocion int,
+descripcion varchar(255)
 );
 
 

@@ -6,21 +6,24 @@
 		private $srtimage;
 		private $intemocion;
 		private $intidemocion;
+        private $srtdescripcion;
 
 		public function __construct()
 		{
 			parent::__construct();
 		}
 
-		public function insertEmocion(int $emocion, String $image){
+		public function insertEmocion(int $emocion, String $image,String $descripcion){
            
             $this->intemocion  = $emocion;
             $this->srtimage  = $image;
+            $this->srtdescripcion = $descripcion;
            
-                $query_insert  = "INSERT INTO emocion_image(id_emocion, emocion_image)VALUES(?,?)";
+                $query_insert  = "INSERT INTO emocion_image(id_emocion, emocion_image, descripcion)VALUES(?,?, ?)";
                 $arrData = array(
                     $this->intemocion,
-                    $this->srtimage
+                    $this->srtimage,
+                    $this->srtdescripcion
                  
                 );
                 $request_insert = $this->insert($query_insert, $arrData);
@@ -30,16 +33,18 @@
         }
 
 		
-        public function updateEmocion(int $idemocion, int $emocion, String $image){
+        public function updateEmocion(int $idemocion, int $emocion, String $image, String $descripcion){
 
 			$this->intidemocion =$idemocion;
             $this->intemocion  = $emocion;
             $this->srtimage  = $image;
+            $this->srtdescripcion = $descripcion;
      
-             $sql = "UPDATE emocion_image SET id_emocion =?, emocion_image =? WHERE idemocion_image = $this->intidemocion";
+             $sql = "UPDATE emocion_image SET id_emocion =?, emocion_image =?, descripcion=? WHERE idemocion_image = $this->intidemocion";
              $arrData = array(
                 	$this->intemocion,
-                    $this->srtimage
+                    $this->srtimage,
+                    $this->srtdescripcion
              );
 
            

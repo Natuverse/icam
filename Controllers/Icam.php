@@ -184,9 +184,9 @@ class Icam extends Controllers
 
                                     <div class="flex1">
                                         <div class="backgroundColors">
-                                            <div class="bigTitle">ALEGRE</div>
-                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['id_emocion'].'" />
-                                            <div class="text" style="font-size: 12px; font-weight:100">Muestra tu mejor sonrisa</div>
+                                            <div class="bigTitle">'.$arrSentimiento[$sent]['emocion_es'] .'</div>
+                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['emocion_es'].'" />
+                                            <div class="text" style="font-size: 12px; font-weight:100">'.$arrSentimiento[$sent]['descripcion'] .'</div>
                                         </div>
                                     </div>
 

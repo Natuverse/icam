@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { data: "idemocion_image" },
             { data: "imagen" },
             { data: "emocion" },
+            { data: "descripcion" },
             { data: "options" },
         ],
     });
@@ -140,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         rowTable.cells[0].textContent = objData.idemocion_image;
                         rowTable.cells[1].innerHTML =  $url;
                         rowTable.cells[2].textContent = objData.emocion;
+                        rowTable.cells[3].textContent = objData.descripcion;
                         rowTable = ""; 
                     }
   
@@ -232,13 +234,14 @@ function fntEditInfo(element, idemocion) {
              
 
                 document.querySelector("#emocion").value =objemocion.id_emocion;
+                document.querySelector("#descripcion").value =objemocion.descripcion;
                
              
-                
+                document.querySelector("#image_actual").value =
+                objemocion.emocion_image; 
                 ///foto avatar
                 if (objemocion.image_exite) {
-                    document.querySelector("#image_actual").value =
-                    objemocion.emocion_image;
+                    
                     document.querySelector("#image_remove").value = 0;
 
                     if (document.querySelector("#imgregistro")) {
