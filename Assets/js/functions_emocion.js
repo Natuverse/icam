@@ -134,11 +134,11 @@ document.addEventListener("DOMContentLoaded", function() {
                       if(rowTable == ""){
                         tableEmocion.api().ajax.reload();
                     }else{
-                        
+                        tableEmocion.api().ajax.reload();
                         $url ="<img src='"+base_url+"/Assets/images/uploads/emocion/"+ objData.image +"' class='rounded-circle  rounded' width='50px' height='50px' alt=''>";
                         
                         
-                        rowTable.cells[0].textContent = objData.idemocion_image;
+                        rowTable.cells[0].textContent = objData.idemocion;
                         rowTable.cells[1].innerHTML =  $url;
                         rowTable.cells[2].textContent = objData.emocion;
                         rowTable.cells[3].textContent = objData.descripcion;

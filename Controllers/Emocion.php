@@ -94,14 +94,14 @@ class Emocion extends Controllers
 
 				if ($request > 0) {
 					if ($option == 1) {
-						$arrResponse = array('status' => true, 'emocion'=>$arr['emocion'], 'idemocion' => $request, 'image'=>$imgimage, 'msg' => 'Datos guardados correctamente.');
+						$arrResponse = array('status' => true, 'emocion'=>$arr['emocion'], 'idemocion' => $request, 'image'=>$imgimage, 'descripcion'=>$descripcion, 'msg' => 'Datos guardados correctamente.');
 						if ($nombre_image != '') {
 							uploadImage($image, $imgimage, $folderimage);
 						}
 					
 				
 					} else {
-						$arrResponse = array('status' => true, 'emocion'=>$arr['emocion'], 'idemocion' => $idemocion, 'image'=>$imgimage, 'msg' => 'Datos guardados correctamente.');
+						$arrResponse = array('status' => true, 'emocion'=>$arr['emocion'], 'idemocion' => $idemocion, 'image'=>$imgimage, 'descripcion'=>$descripcion, 'msg' => 'Datos guardados correctamente.');
 						if ($nombre_image != '') {
 							uploadImage($image, $imgimage, $folderimage);
 						}

@@ -53,7 +53,7 @@
                                     <div class="mb-3 p-0 row">
                                             <div class="col-md-12">
                                                 <label class="form-label" for="descripcion">DESCRIPCION: </label>
-                                                <input type="text" name="descripcion" id="descripcion" class="form-control " placeholder="descripcion" required>
+                                                <input type="text" name="descripcion" id="descripcion" class="form-control " placeholder="descripcion" >
                                             </div>
                                        
 
