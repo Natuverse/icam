@@ -24,6 +24,7 @@ $(document).ready(function() {
                 $("#imgregistro").remove();
                 $(".delFotoRegistro").removeClass("notBlock");
                 var objeto_url = nav.createObjectURL(this.files[0]);
+                console.log(objeto_url);
                 document.querySelector(".prevRegistro div").innerHTML =
                     "<img id='imgregistro' name='imgregistro' src=" + objeto_url + ">";
                 $("#imgregistro").addClass("img-profile");

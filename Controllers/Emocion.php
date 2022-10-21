@@ -50,7 +50,7 @@ class Emocion extends Controllers
 				$imgimage = 'default-image.png';
 				$folderimage = 'emocion';
 				if ($nombre_image != '') {
-					$imgimage = 'img_' . md5(date('d-m-Y H:m:s')) . '.git';
+					$imgimage = 'img_' . md5(date('d-m-Y H:m:s')) . '.gif';
 				}
 
 			
@@ -108,7 +108,7 @@ class Emocion extends Controllers
 						if (($nombre_image == '' && $_POST['image_remove'] == 1 && $_POST['image_actual'] != 'default-image.png')
 							|| ($nombre_image != '' && $_POST['image_actual'] != 'default-image.png'  )
 						) {
-							deleteFile($_POST['image_actual'], $folderimage);
+							//deleteFile($_POST['image_actual'], $folderimage);
 						}
 				
 					}
