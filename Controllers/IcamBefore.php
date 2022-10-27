@@ -184,17 +184,17 @@ class Icam extends Controllers
 
                                     <div class="flex1">
                                         <div class="backgroundColors">
-                                            <div class="bigTitle">'.$arrSentimiento[$sent]['emocion_es'] .'</div>
-                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['emocion_es'].'" />
-                                            <div class="text" style="font-size: 12px; font-weight:100">'.$arrSentimiento[$sent]['descripcion'] .'</div>
+                                            <div class="bigTitle">ALEGRE</div>
+                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['id_emocion'].'" />
+                                            <div class="text" style="font-size: 12px; font-weight:100">Muestra tu mejor sonrisa</div>
                                         </div>
                                     </div>
 
                                 </div>
-                                <br>
-                                <div id="answers" style="margin-top:20px">
+
+                                <div id="answers">
                                     <div class="title" style="color: white; font-size:16px; font-weight:bold; margin-bottom: 8px;">SUGERENCIA DE RESPUESTAS</div>
-                                    <div class="itemAnswer" style="display:none">
+                                    <div class="itemAnswer">
                                         <div id="answer1ES" class="text">
                                             '.$response1_ES.'
                                         </div>
@@ -205,18 +205,18 @@ class Icam extends Controllers
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response1_EN.'" title="Send"/>
                                     </div>
 
-                                    <div class="itemAnswer" style="padding-top:40px; height:68px">
-                                        <div id="answer2ES" class="text" style="width:80%">
+                                    <div class="itemAnswer">
+                                        <div id="answer2ES" class="text">
                                             '.$response2_ES.'
                                         </div>
                                         <br>
-                                        <div id="answer2EN" class="text" style="font-weight: 100; width:80%">
+                                        <div id="answer2EN" class="text" style="font-weight: 100;">
                                             '.$response2_EN.'
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Send"/>
                                     </div>
 
-                                    <div class="itemAnswer" style="display:none">
+                                    <div class="itemAnswer">
                                         <div id="answer3ES" class="text">
                                             '.$response3_ES.'
                                         </div>
@@ -553,7 +553,7 @@ class Icam extends Controllers
         
     
     public function translate($text1, $text2, $text3, $text4){
-        $url = "https://api.deepl.com/v2/translate";
+        $url = "https://api-free.deepl.com/v2/translate";
 
         $ch = curl_init($url);
 
@@ -563,12 +563,12 @@ class Icam extends Controllers
             'text' => $text3,
             'text' => $text4,
             'target_lang' => 'ES',
-            'auth_key' => 'd15a8e8e-94a7-9e17-547d-9331610be21c:fx');
+            'auth_key' => '9d2faece-c6a9-1244-2596-e047dd25d881:fx');
 
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-                'text='.$text1.'&text='.$text2.'&text='.$text3.'&text='.$text4.'&target_lang=ES&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c:fx');
+                'text='.$text1.'&text='.$text2.'&text='.$text3.'&text='.$text4.'&target_lang=ES&auth_key=9d2faece-c6a9-1244-2596-e047dd25d881:fx');
 
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
