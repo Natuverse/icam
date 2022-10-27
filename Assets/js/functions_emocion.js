@@ -24,6 +24,7 @@ $(document).ready(function() {
                 $("#imgregistro").remove();
                 $(".delFotoRegistro").removeClass("notBlock");
                 var objeto_url = nav.createObjectURL(this.files[0]);
+                console.log(objeto_url);
                 document.querySelector(".prevRegistro div").innerHTML =
                     "<img id='imgregistro' name='imgregistro' src=" + objeto_url + ">";
                 $("#imgregistro").addClass("img-profile");
@@ -93,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { data: "idemocion_image" },
             { data: "imagen" },
             { data: "emocion" },
+            { data: "descripcion" },
             { data: "options" },
         ],
     });
@@ -133,13 +135,14 @@ document.addEventListener("DOMContentLoaded", function() {
                       if(rowTable == ""){
                         tableEmocion.api().ajax.reload();
                     }else{
-                        
+                        tableEmocion.api().ajax.reload();
                         $url ="<img src='"+base_url+"/Assets/images/uploads/emocion/"+ objData.image +"' class='rounded-circle  rounded' width='50px' height='50px' alt=''>";
                         
                         
-                        rowTable.cells[0].textContent = objData.idemocion_image;
+                        rowTable.cells[0].textContent = objData.idemocion;
                         rowTable.cells[1].innerHTML =  $url;
                         rowTable.cells[2].textContent = objData.emocion;
+                        rowTable.cells[3].textContent = objData.descripcion;
                         rowTable = ""; 
                     }
   
@@ -232,13 +235,14 @@ function fntEditInfo(element, idemocion) {
              
 
                 document.querySelector("#emocion").value =objemocion.id_emocion;
+                document.querySelector("#descripcion").value =objemocion.descripcion;
                
              
-                
+                document.querySelector("#image_actual").value =
+                objemocion.emocion_image; 
                 ///foto avatar
                 if (objemocion.image_exite) {
-                    document.querySelector("#image_actual").value =
-                    objemocion.emocion_image;
+                    
                     document.querySelector("#image_remove").value = 0;
 
                     if (document.querySelector("#imgregistro")) {

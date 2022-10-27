@@ -93,8 +93,9 @@
 		public function consultarEmociones(int $id_emocion){
 			$this->intId_emocion = $id_emocion;
 
-			$sql = "SELECT * FROM emocion_image  
-			WHERE id_emocion = $this->intId_emocion ";
+			$sql = "SELECT * FROM emocion_image as ei
+			left join emocion as e on ei.id_emocion = e.idemocion 
+			WHERE ei.id_emocion = $this->intId_emocion ";
 			
 			
 				$request = $this->select_all($sql);
