@@ -74,7 +74,8 @@ class Icam extends Controllers
                     //Validate existing token, if empy, sing up for get new
                     
                     
-                $token = $this->login($_POST['girl']);
+                    //$token = $this->login($_POST['girl']);
+                    
                     if(empty($_POST['token'])){
                         $token = $this->login($_POST['girl']);
                         
@@ -82,6 +83,8 @@ class Icam extends Controllers
                             $this->signup($_POST['girl']);
                             $token = $this->login($_POST['girl']);
                         }
+                    }else{
+                        $token = $_POST['token'];
                     }
                 
                     
@@ -563,12 +566,12 @@ class Icam extends Controllers
             'text' => $text3,
             'text' => $text4,
             'target_lang' => 'ES',
-            'auth_key' => 'd15a8e8e-94a7-9e17-547d-9331610be21c:fx');
+            'auth_key' => 'd15a8e8e-94a7-9e17-547d-9331610be21c');
 
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-                'text='.$text1.'&text='.$text2.'&text='.$text3.'&text='.$text4.'&target_lang=ES&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c:fx');
+                'text='.$text1.'&text='.$text2.'&text='.$text3.'&text='.$text4.'&target_lang=ES&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c');
 
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
