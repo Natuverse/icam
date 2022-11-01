@@ -25,15 +25,15 @@ class dictionary_deepl{
         $post = array(
             'name' => 'icamGlossary',
             'entries' => 'thx%09gracias\npvt%09privado',
-            'target_lang' => 'ES',
-            'source_lang' => 'EN',
+            'target_lang' => 'EN',
+            'source_lang' => 'ES',
             'entries_format' => 'tsv',
             'auth_key' => 'd15a8e8e-94a7-9e17-547d-9331610be21c');
 
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);    
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-                'name=icamGlossary&entries=PVT%09privadi&source_lang=EN&target_lang=ES&entries_format=tsv&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c');
+                'name=icamGlossary&entries=PVT%09privadi&source_lang=ES&target_lang=EN&entries_format=tsv&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c');
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
