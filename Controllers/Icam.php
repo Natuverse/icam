@@ -232,7 +232,7 @@ class Icam extends Controllers
                                             '.$response1_EN.'
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response1_EN.'" title="Copiar"/>
-                                        <img class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response1_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
+                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response1_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
                                     </div>
 
                                     <div class="itemAnswer" style="padding-top:40px; height:68px">
@@ -244,7 +244,7 @@ class Icam extends Controllers
                                             '.$response2_EN.'
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
-                                        <img class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response2_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
+                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response2_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
                                     </div>
 
                                     <div class="itemAnswer" style="display:none">
@@ -256,7 +256,7 @@ class Icam extends Controllers
                                             '.$response3_EN.'
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response3_EN.'" title="Copiar"/>
-                                        <img class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response3_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
+                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response3_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
                                     </div>
                                 </div>';
 
