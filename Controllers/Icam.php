@@ -35,15 +35,22 @@ class Icam extends Controllers
                 $webCam  =  strClean($_POST['webCam']);
                 $private =  intval($_POST['private']);
                 $voice =  intval($_POST['voice']);          
-           
+              
                 $iduser   = $this->model->consultarUsuario($user, $type);
+             
+               
                 $idwebcam =0;
                 if( $type ==2){
                     $idwebcam   = $this->model->consultarUsuario($webCam, $type);
-                }               
+                }else{
+                    
+                }
+                            
              
                 $requestConversacion = $this->model->InsertConversacional($iduser, $message, $idwebcam, $private, $voice);
+
            
+                
                 if(!empty($requestConversacion)){
                     $arrResponse = array('status' => true, 'msg' => 'ok' ); 
                 }else{
@@ -71,13 +78,12 @@ class Icam extends Controllers
                     $message_EN  =  strClean($_POST['message']);
                     $html = '';
 
-                    //Validate existing token, if empy, sing up for get new
-                    
-                    
-                    //$token = $this->login($_POST['girl']);
+                  
                     
                     if(empty($_POST['token'])){
                         $token = $this->login($_POST['girl']);
+                        $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
+                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0 );
                         
                         if($token == 'none'){
                             $this->signup($_POST['girl']);
@@ -85,8 +91,10 @@ class Icam extends Controllers
                         }
                     }else{
                         $token = $_POST['token'];
+                       
                     }
-                
+                   
+                  
                     
                     $response1_EN = "";
                     $response2_EN = $this->chat($token, $message_EN);
@@ -234,6 +242,9 @@ class Icam extends Controllers
                     $arrResponse = array('html' => $html, 'token' => $token);
                     
 
+                    $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
+                    $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$_POST['message'], $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
                 
 
                 /*

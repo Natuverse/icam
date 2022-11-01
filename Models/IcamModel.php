@@ -11,6 +11,8 @@
 		private $intvoice;
 		private $srtword;
 		private $intId_emocion;
+		private $strrespuesta;
+		private $intIDemocion;
 
         
 		public function __construct()
@@ -29,17 +31,22 @@
 
 			$sql = "SELECT * FROM usuariobot  
 			WHERE nombre = '$this->strUser' ";
+
 			$request = $this->select_all($sql);
+		
+			
 			if (empty($request)) {
-				$query_insert  = "INSERT INTO usuariobot(nombre, tipo)
+				$query_insert  = "INSERT INTO usuariobot (nombre, tipo)
 				VALUES(?,?)";
 				$arrData = array(
 					$this->strUser,
-					$this->intType
+					$this->intTyp
 					
 				);
 			
+			
 				$request_insert = $this->insert($query_insert, $arrData);
+				
 				$return = $request_insert;
 			} else {
 				$return = $request[0]['idusuariobot'];
@@ -101,6 +108,36 @@
 				$request = $this->select_all($sql);
 				
 			return $request;
+		}
+
+		public function inserlog( int $iduser, int $type, Int $cliente, String $pregunta,  String $respuesta, int $idemocion){
+			
+
+			$this->idWebcam = $iduser;
+			$this->intIdUser=$cliente;
+            $this->intType = $type;
+			$this->sttMensaje= $pregunta;
+			$this->strrespuesta=  $respuesta;
+			$this->intIDemocion = $idemocion;
+
+			
+		    $query_insert  = "INSERT INTO log(model, tipo, user, pregunta, respuesta, idemocion)
+				VALUES(?,?,?, ?,?,?)";
+				$arrData = array(
+					$this->idWebcam,
+					$this->intType,
+                    $this->intIdUser,
+					$this->sttMensaje,
+					$this->strrespuesta,
+					$this->intIDemocion 
+					
+				);
+			
+				$request_insert = $this->insert($query_insert, $arrData);
+				$return = $request_insert;
+			
+			return $return;
+			
 		}
 
         

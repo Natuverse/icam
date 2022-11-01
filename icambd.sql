@@ -107,6 +107,17 @@ nombre varchar (50),
 tipo int 
 );
 
+create table log(
+idlog bigint not null auto_increment,
+primary key(idlog),
+model bigint,
+tipo int,
+tiempo datetime default current_timestamp,
+user bigint,
+pregunta longtext,
+respuesta longtext
+);
+
 create table conversacion(
 idconversacion bigint not null auto_increment,
 primary key (idconversacion),
