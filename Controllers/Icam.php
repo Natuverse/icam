@@ -123,9 +123,6 @@ class Icam extends Controllers
 
                     } 
                     $message_EN = $cadena;           
-                   
-                  
-                    
                     $response1_EN = "";
                     $response2_EN = $this->chat($token, $message_EN);
                     $response3_EN = "";
@@ -136,10 +133,7 @@ class Icam extends Controllers
                     $response1_ES = $arrayTranslation[1]['text'];
                     $response2_ES = $arrayTranslation[2]['text'];
                     $response3_ES = $arrayTranslation[3]['text'];
-                
-                
                     // for feelings
-                
                     $params=['message'=>  strClean($_POST['message'])];
                     $defaults = array(
                     CURLOPT_URL => 'http://192.168.1.254:5000',
