@@ -140,6 +140,18 @@
 			
 		}
 
+		public function consulAbre(String $word){			
+
+			$this->srtword = $word;
+			$sql = "SELECT * FROM abreviacion  
+			WHERE abreviacion = '$this->srtword' ";
+			
+			
+				$request = $this->select_all($sql);
+				
+			return $request;
+		}
+
         
         
 

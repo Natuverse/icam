@@ -115,7 +115,8 @@ tipo int,
 tiempo datetime default current_timestamp,
 user bigint,
 pregunta longtext,
-respuesta longtext
+respuesta longtext,
+idemocion int 
 );
 
 create table conversacion(
@@ -46131,6 +46132,13 @@ primary key (idemocion_image),
 emocion_image varchar (255),
 id_emocion int,
 descripcion varchar(255)
+);
+
+create table abreviacion(
+idabreviacion bigint not null auto_increment,
+primary key (idabreviacion),
+abreviacion varchar (100),
+palabra varchar (100)
 );
 
 

@@ -93,6 +93,41 @@ class Icam extends Controllers
                         $token = $_POST['token'];
                        
                     }
+
+                    $words = explode(" ", $message_EN);
+                    $cadena ="";
+                    $html2 = "";
+                    foreach($words as $word){
+                        $request =0;
+                        $requestabre = $this->model->consulAbre($word);
+                        if(sizeof($requestabre) > 0 ){
+                            $cadena.=
+                            $word =   $request[0]['palabra'];                   
+
+                        }else{
+                            $cadena.=$word." ";
+                            //$html.=$word." ";
+                        }  
+                        $request = $this->model->consultDiccionario($word);
+                       
+                        
+                        if(sizeof($request) > 0 ){
+                            //$cadena.=$request[0]['palabra'];
+                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
+
+                        }else{
+                            //$cadena.=$word." ";
+                            $html2.=$word." ";
+                        } 
+                        
+                         
+
+                    } 
+                    $message_EN = $cadena;
+
+
+
+                    
                    
                   
                     
@@ -169,24 +204,7 @@ class Icam extends Controllers
                                     <div class="flex1 box">
                                         <div class="titleTag">ORIGINAL</div>
                                         <p id="textEnglish">
-                                            ';
-                
-                    $words = explode(" ", $message_EN);
-
-                    foreach($words as $word){
-                        $request =0;
-                        $request = $this->model->consultDiccionario($word);
-                        
-                        if(sizeof($request) > 0 ){
-                            $html.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
-
-                        }else{
-                            $html.=$word." ";
-                        }                                     
-
-                    }      
-                
-                    $html .= '
+                                            '.$html2.'
                                         </p>
                                         <div class="toRight">
                                             <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
