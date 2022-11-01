@@ -101,9 +101,9 @@ class Icam extends Controllers
                         $request =0;
                         $requestabre = $this->model->consulAbre($word);
                         if(sizeof($requestabre) > 0 ){
-                            $cadena.=
-                            $word =   $request[0]['palabra'];                   
-
+                            
+                            $word =   $requestabre[0]['palabra'];                   
+                            $cadena.=$word." ";
                         }else{
                             $cadena.=$word." ";
                             //$html.=$word." ";
@@ -120,14 +120,9 @@ class Icam extends Controllers
                             $html2.=$word." ";
                         } 
                         
-                         
 
                     } 
-                    $message_EN = $cadena;
-
-
-
-                    
+                    $message_EN = $cadena;           
                    
                   
                     
