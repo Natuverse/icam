@@ -65,6 +65,85 @@ class Icam extends Controllers
 
     }
 
+    public function pruebas(){
+        if (!empty($_POST)) {
+            
+            if(empty($_POST['message']) ){
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+                
+            }else{
+                $message_EN  =  strClean($_POST['message']);
+                $words = explode(" ", $message_EN);
+                $cadena ="";
+                $html2 = "";
+                $temp =0;
+                $double = true;
+                //dep($words[0]);
+                $cat =  count($words)-1 ;
+               
+
+                for($i = 0; $i < count($words); ++$i) {
+                    $request =0;
+                    $requestcom = 0;
+                    $requestabre = $this->model->consulAbre($words[$i]);
+                    if(sizeof($requestabre) > 0 ){
+                        
+                        $words[$i] =   $requestabre[0]['palabra'];                   
+                        $cadena.=$words[$i]." ";
+                    }else{
+                        $cadena.=$words[$i]." ";
+                        //$html.=$word." ";
+                    }  
+                    $request = $this->model->consultDiccionario($words[$i]);
+                    $temp = $i;
+                   
+                    if($i< $cat){
+                        $i++;
+                       // echo $words[$temp]."\n";
+                       // echo $words[$i]."\n";
+                        $word = $words[$temp]." ".$words[$i];
+                       // echo $word;
+                        $requestcom = $this->model->consultDiccionario($word);
+                    }else{
+                        $requestcom = $this->model->consultDiccionario("");
+                    }
+                   
+                   
+                    //print_r($requestcom);
+                    if(sizeof($request) > 0 ){
+                        //$cadena.=$request[0]['palabra'];
+                        if($double){
+                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$words[$temp].'</span> ';
+                        }else{
+                            $double = true;
+                        }
+                     
+                       // echo sizeof($requestcom);
+                    }else if(sizeof($requestcom) > 0){
+                        $double = false;
+                        //$cadena.=$word." ";
+                        $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$requestcom[0]['significado_es'].'">'.$words[$temp]." ".$words[$i].'</span> ';
+                      
+                    } else{
+                        if( $double){
+                            $html2.=$words[$temp]." ";
+                        }
+                       
+                    }
+                    $i = $temp;
+                }
+
+                echo ($html2);
+               // echo $cadena;
+                
+                exit;
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+     
+        die();
+    }
+
     public function diccionario()
     {
         if (!empty($_POST)) {
@@ -97,31 +176,63 @@ class Icam extends Controllers
                     $words = explode(" ", $message_EN);
                     $cadena ="";
                     $html2 = "";
-                    foreach($words as $word){
-                        $request =0;
-                        $requestabre = $this->model->consulAbre($word);
-                        if(sizeof($requestabre) > 0 ){
-                            
-                            $word =   $requestabre[0]['palabra'];                   
-                            $cadena.=$word." ";
+
+                    $temp =0;
+                $double = true;
+                //dep($words[0]);
+                $cat =  count($words)-1 ;
+               
+
+                for($i = 0; $i < count($words); ++$i) {
+                    $request =0;
+                    $requestcom = 0;
+                    $requestabre = $this->model->consulAbre($words[$i]);
+                    if(sizeof($requestabre) > 0 ){
+                        
+                        $words[$i] =   $requestabre[0]['palabra'];                   
+                        $cadena.=$words[$i]." ";
+                    }else{
+                        $cadena.=$words[$i]." ";
+                        //$html.=$word." ";
+                    }  
+                    $request = $this->model->consultDiccionario($words[$i]);
+                    $temp = $i;
+                   
+                    if($i< $cat){
+                        $i++;
+                       // echo $words[$temp]."\n";
+                       // echo $words[$i]."\n";
+                        $word = $words[$temp]." ".$words[$i];
+                       // echo $word;
+                        $requestcom = $this->model->consultDiccionario($word);
+                    }else{
+                        $requestcom = $this->model->consultDiccionario("");
+                    }
+                   
+                   
+                    //print_r($requestcom);
+                    if(sizeof($request) > 0 ){
+                        //$cadena.=$request[0]['palabra'];
+                        if($double){
+                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$words[$temp].'</span> ';
                         }else{
-                            $cadena.=$word." ";
-                            //$html.=$word." ";
-                        }  
-                        $request = $this->model->consultDiccionario($word);
+                            $double = true;
+                        }
+                     
+                       // echo sizeof($requestcom);
+                    }else if(sizeof($requestcom) > 0){
+                        $double = false;
+                        //$cadena.=$word." ";
+                        $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$requestcom[0]['significado_es'].'">'.$words[$temp]." ".$words[$i].'</span> ';
+                      
+                    } else{
+                        if( $double){
+                            $html2.=$words[$temp]." ";
+                        }
                        
-                        
-                        if(sizeof($request) > 0 ){
-                            //$cadena.=$request[0]['palabra'];
-                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
-
-                        }else{
-                            //$cadena.=$word." ";
-                            $html2.=$word." ";
-                        } 
-                        
-
-                    } 
+                    }
+                    $i = $temp;
+                }
                     $message_EN = $cadena;           
                     $response1_EN = "";
                     $response2_EN = $this->chat($token, $message_EN);
