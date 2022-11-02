@@ -76,7 +76,7 @@ class Icam extends Controllers
                 
                 $params=['message'=>  strClean($_POST['message'])];
                 $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:5000',
+                CURLOPT_URL => 'http://192.168.1.254:5000/idioma',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => $params,
