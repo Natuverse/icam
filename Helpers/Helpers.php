@@ -173,6 +173,7 @@ function strClean($strCadena)
     $string = str_ireplace(":", "", $string);
     $string = str_ireplace("¨", "", $string);
     $string = str_ireplace("°", "", $string);
+    $string = str_ireplace("'", "´", $string);
     $string = str_ireplace("😂", "", $string);
     $string = str_ireplace("😀", "", $string);
     $string = str_ireplace("😃", "", $string);

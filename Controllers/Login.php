@@ -29,7 +29,8 @@
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
 				}else{
 					$strUsuario  =  strClean($_POST['txtemail']);
-					$strPassword = hash("sha512",$_POST['txtPassword']);
+					//$strPassword = hash("sha512",$_POST['txtPassword']);
+					$strPassword =$_POST['txtPassword'];
 					//dep($_POST);die;
 					$requestUser = $this->model->loginUser($strUsuario, $strPassword);
 					

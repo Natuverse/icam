@@ -73,69 +73,26 @@ class Icam extends Controllers
                 
             }else{
                 $message_EN  =  strClean($_POST['message']);
-                $words = explode(" ", $message_EN);
-                $cadena ="";
-                $html2 = "";
-                $temp =0;
-                $double = true;
-                //dep($words[0]);
-                $cat =  count($words)-1 ;
-               
-
-                for($i = 0; $i < count($words); ++$i) {
-                    $request =0;
-                    $requestcom = 0;
-                    $requestabre = $this->model->consulAbre($words[$i]);
-                    if(sizeof($requestabre) > 0 ){
-                        
-                        $words[$i] =   $requestabre[0]['palabra'];                   
-                        $cadena.=$words[$i]." ";
-                    }else{
-                        $cadena.=$words[$i]." ";
-                        //$html.=$word." ";
-                    }  
-                    $request = $this->model->consultDiccionario($words[$i]);
-                    $temp = $i;
-                   
-                    if($i< $cat){
-                        $i++;
-                       // echo $words[$temp]."\n";
-                       // echo $words[$i]."\n";
-                        $word = $words[$temp]." ".$words[$i];
-                       // echo $word;
-                        $requestcom = $this->model->consultDiccionario($word);
-                    }else{
-                        $requestcom = $this->model->consultDiccionario("");
-                    }
-                   
-                   
-                    //print_r($requestcom);
-                    if(sizeof($request) > 0 ){
-                        //$cadena.=$request[0]['palabra'];
-                        if($double){
-                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$words[$temp].'</span> ';
-                        }else{
-                            $double = true;
-                        }
-                     
-                       // echo sizeof($requestcom);
-                    }else if(sizeof($requestcom) > 0){
-                        $double = false;
-                        //$cadena.=$word." ";
-                        $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$requestcom[0]['significado_es'].'">'.$words[$temp]." ".$words[$i].'</span> ';
-                      
-                    } else{
-                        if( $double){
-                            $html2.=$words[$temp]." ";
-                        }
-                       
-                    }
-                    $i = $temp;
-                }
-
-                echo ($html2);
-               // echo $cadena;
                 
+                $params=['message'=>  strClean($_POST['message'])];
+                $defaults = array(
+                CURLOPT_URL => 'http://192.168.1.254:5000',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params,
+                );
+                $ch = curl_init();
+                curl_setopt_array($ch, $defaults);
+
+                $result2 = curl_exec($ch);
+
+                curl_close($ch);
+
+                $array = json_decode($result2, true);
+               
+                $idioma  = $array['idioma'];
+               
+                dep($idioma);
                 exit;
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
