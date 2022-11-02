@@ -65,40 +65,30 @@ class Icam extends Controllers
 
     }
 
-    public function pruebas(){
-        if (!empty($_POST)) {
+    function detectLanguage($text){
+        $words = explode(" ", $text);
+        if (count($words) > 3) {
             
-            if(empty($_POST['message']) ){
-                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
-                
-            }else{
-                $message_EN  =  strClean($_POST['message']);
-                
-                $params=['message'=>  strClean($_POST['message'])];
-                $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:5000/idioma',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $params,
-                );
-                $ch = curl_init();
-                curl_setopt_array($ch, $defaults);
+            $params=['message'=>  strClean($text)];
+            $defaults = array(
+            CURLOPT_URL => 'http://192.168.1.254:5000/idioma',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $params,
+            );
+            $ch = curl_init();
+            curl_setopt_array($ch, $defaults);
 
-                $result2 = curl_exec($ch);
+            $result2 = curl_exec($ch);
 
-                curl_close($ch);
+            curl_close($ch);
 
-                $array = json_decode($result2, true);
-               
-                $idioma  = $array['idioma'];
-               
-                dep($idioma);
-                exit;
-            }
-            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            $array = json_decode($result2, true);
+
+            return $array['idioma']['label'];
         }
-     
-        die();
+        
+        return $text;
     }
 
     public function diccionario()
@@ -112,6 +102,13 @@ class Icam extends Controllers
               
               
                     $message_EN  =  strClean($_POST['message']);
+                    /*$language = $this->detectLanguage($message_EN);
+                    //var_dump($language);
+                    
+                    if($language != "EN"){
+                        $message_EN = $this->translateTo($message_EN, 'EN')[0]['text'];
+                    }*/
+                    
                     $html = '';
 
                   
@@ -201,6 +198,7 @@ class Icam extends Controllers
                     $response1_ES = $arrayTranslation[1]['text'];
                     $response2_ES = $arrayTranslation[2]['text'];
                     $response3_ES = $arrayTranslation[3]['text'];
+                
                     // for feelings
                     $params=['message'=>  strClean($_POST['message'])];
                     $defaults = array(
@@ -282,7 +280,7 @@ class Icam extends Controllers
                                     <div class="title" style="color: white; font-size:16px; font-weight:bold; margin-bottom: 8px;">SUGERENCIA DE RESPUESTAS</div>
                                     <div class="itemAnswer" style="display:none">
                                         <div id="answer1ES" class="text">
-                                            '.$response1_ES.'
+                                            '.$response2_ES.'
                                         </div>
                                         <br>
                                         <div id="answer1EN" class="text" style="font-weight: 100;">
@@ -323,222 +321,6 @@ class Icam extends Controllers
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
                     $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$_POST['message'], $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
-                
-
-                /*
-                $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:8080/interact',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $params,
-                );
-                $ch2 = curl_init();
-                curl_setopt_array($ch2, $defaults);
-
-                $result3 = curl_exec($ch2);
-                curl_close($ch2);
-                //$str = substr($result, 1, -1);
-                //print_r($result);
-
-
-                $array2 = json_decode($result3, true);
-               
-               
-                $params=['message'=>  $array2['text']];
-                $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:5000',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $params,
-                );
-                $ch = curl_init();
-                curl_setopt_array($ch, $defaults);
-
-                $resultes1 = curl_exec($ch);
-
-                curl_close($ch);
-                //$str = substr($result, 1, -1);
-                //print_r($result);
-
-
-                $arrayEs2 = json_decode($resultes1, true);
-                $textEsF = $arrayEs2['traduccion']['text'];
-
-                /////////////////////////////////
-
-                $params=['message'=>   $array2['beam_texts'][0][0]];
-                $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:5000',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $params,
-                );
-                $ch = curl_init();
-                curl_setopt_array($ch, $defaults);
-
-                $resultes2 = curl_exec($ch);
-
-                curl_close($ch);
-                //$str = substr($result, 1, -1);
-                //print_r($result);
-
-
-                $arrayEs2 = json_decode($resultes2, true);
-                $textEsF1 = $arrayEs2['traduccion']['text'];
-
-                ////////////////////////////////////////////
-                $params=['message'=>   $array2['beam_texts'][1][0]];
-                $defaults = array(
-                CURLOPT_URL => 'http://192.168.1.254:5000',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $params,
-                );
-                $ch = curl_init();
-                curl_setopt_array($ch, $defaults);
-
-                $resultes3 = curl_exec($ch);
-
-                curl_close($ch);
-                //$str = substr($result, 1, -1);
-                //print_r($result);
-
-
-                $arrayEs3 = json_decode($resultes3, true);
-                $textEsF2 = $arrayEs3['traduccion']['text'];
-              
-
-                $words = explode(" ", $message);
-                $words2 = explode(" ", $words2);
-                //$words2  =  strClean($words2);
-                $result = [];
-
-                $html= '<div id="btnClose"></div>
-                <div class="titleBar">
-                    <div id="nameUser" class="bigTitle">JCLEON</div>
-                    <div id="preferences">
-                        
-                    </div>
-                </div>
-                <br>
-                <div class="flexH">
-                    <div class="flex2">
-                        <div class="box">
-                      
-                            <div class="titleTag">TRASLATE</div>
-                            <p id="testSpanish">';
-                         
-                foreach($words2 as $word){
-                    $request =0;
-                    $request = $this->model->consultDiccionario($word);
-                    //Consultar base de datos
-                    // $dts es la respuesta de la consulta
-                 
-            
-
-                    if(sizeof($request) > 0 ){
-                        $html.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
-
-                    }else{
-                        $html.=$word." ";
-                    }
-
-                                       
-                   
-                }
-             
-                $html.=' </p>
-                <div class="toRight">
-                    <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="box">
-                
-                <div class="titleTag">ORIGINAL</div>        
-                <p id="textEnglish">';
-
-               // $worda2 =  $array['traduccion']['text']
-
-              
-                foreach($words as $word){
-                    $request =0;
-                    $request = $this->model->consultDiccionario($word);
-                    //Consultar base de datos
-                    // $dts es la respuesta de la consulta
-                 
-            
-
-                    if(sizeof($request) > 0 ){
-                        $html.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$word.'</span> ';
-
-                    }else{
-                        $html.=$word." ";
-                    }                                     
-                   
-                }              
-                
-                
-                $html.='</p>
-                <div class="toRight">
-                    <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
-                </div>
-            </div>
-        </div>
-
-        <div class="flex1">
-        
-            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['id_emocion'].'" />
-        </div>
-        
-    </div>
-
-    <div id="answers">
-        <div class="itemAnswer">
-            <div class="text">
-                '.$textEsF.'
-            </div>
-            <br>
-            <div class="titleGreen">
-               '.$array2['text'].'
-            </div>
-            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$array2['text'].'" title="Send"/>
-        </div>
-
-        <div class="itemAnswer">
-            <div class="text">
-               '.$textEsF1.'
-            </div>
-            <br>
-            <div class="titleGreen">
-                '.$array2['beam_texts'][0][0].'
-            </div>
-            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text=" '.$array2['beam_texts'][0][0].'" title="Send"/>
-        </div>
-
-        <div class="itemAnswer">
-            <div class="text">
-               '.$textEsF2 .'
-            </div>
-            <br>
-            <div class="titleGreen">
-            '.$array2['beam_texts'][1][0].'
-            </div>
-            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text=" '.$array2['beam_texts'][1][0].'" title="Send"/>
-        </div>
-    </div>';
-
-          
-             
-
-               
-             
-              
-           
-    
-                    $arrResponse = array('status' => true, 'msg' => 'ok', 'html'=>$html ); 
-            */
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -673,6 +455,37 @@ class Icam extends Controllers
         
         curl_close ($ch);
 
+        return $array['translations'];
+    }
+    
+    function translateTo(String $text1, String $language){
+        $url = "https://api.deepl.com/v2/translate";
+
+        $ch = curl_init($url);
+
+        $post = array(
+            'text' => $text1,
+            'target_lang' => $language,
+            'auth_key' => 'd15a8e8e-94a7-9e17-547d-9331610be21c');
+
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+                'text='.$text1.'&target_lang='.$language.'&auth_key=d15a8e8e-94a7-9e17-547d-9331610be21c');
+
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        
+
+        $server_output = curl_exec($ch);
+
+        header('Content-Type: text/html');
+
+        $array = json_decode($server_output, true);
+        
+        curl_close ($ch);
+        
         return $array['translations'];
     }
 }
