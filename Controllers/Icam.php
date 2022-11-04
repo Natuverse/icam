@@ -280,7 +280,7 @@ class Icam extends Controllers
                                     <div class="title" style="color: white; font-size:16px; font-weight:bold; margin-bottom: 8px;">SUGERENCIA DE RESPUESTAS</div>
                                     <div class="itemAnswer" style="display:none">
                                         <div id="answer1ES" class="text">
-                                            '.$response2_ES.'
+                                            '.$response1_ES.'
                                         </div>
                                         <br>
                                         <div id="answer1EN" class="text" style="font-weight: 100;">
@@ -299,7 +299,8 @@ class Icam extends Controllers
                                             '.$response2_EN.'
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
-                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response2_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
+                                        
+                                        <img style="width: 30px; float: right; display: inline-flex; cursor: pointer; margin-top: 10px; margin-right: -40px;" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Reportar"/>
                                     </div>
 
                                     <div class="itemAnswer" style="display:none">
