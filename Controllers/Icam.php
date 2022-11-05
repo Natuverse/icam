@@ -300,7 +300,7 @@ class Icam extends Controllers
                                         </div>
                                         <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
                                         
-                                        <img style="width: 30px; float: right; display: inline-flex; cursor: pointer; margin-top: 10px; margin-right: -40px;" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Reportar"/>
+                                        <img style="width: 30px; float: right; display: inline-flex; cursor: pointer; margin-top: 10px; margin-right: -40px;" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
                                     </div>
 
                                     <div class="itemAnswer" style="display:none">
