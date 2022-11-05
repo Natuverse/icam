@@ -24,6 +24,7 @@
 					pass = '$this->strPassword' and 
 					status != 0 ";	
 							
+			//dep($sql);
 			$request = $this->select($sql);
 			
 			return $request;
