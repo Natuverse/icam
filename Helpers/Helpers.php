@@ -150,29 +150,29 @@ function strClean($strCadena)
     $string = str_ireplace("]", "", $string);
     $string = str_ireplace("==", "", $string);
     $string = str_ireplace("??", "", $string);
-    $string = str_ireplace("!", "", $string);
-    $string = str_ireplace(".", "", $string);
-    $string = str_ireplace(",,", "", $string);
-    $string = str_ireplace("_", "", $string);
-    $string = str_ireplace("-", "", $string);
-    $string = str_ireplace("#", "", $string);
-    $string = str_ireplace("$", "", $string);
-    $string = str_ireplace("%", "", $string);
-    $string = str_ireplace("(", "", $string);
-    $string = str_ireplace(")", "", $string);
-    $string = str_ireplace("!", "", $string);
-    $string = str_ireplace("*", "", $string);
-    $string = str_ireplace("¨", "", $string);
-    $string = str_ireplace("¨", "", $string);
-    $string = str_ireplace("]", "", $string);
-    $string = str_ireplace("[", "", $string);
-    $string = str_ireplace("{", "", $string);
-    $string = str_ireplace("}", "", $string);
-    $string = str_ireplace("¨", "", $string);
-    $string = str_ireplace("¨", "", $string);
-    $string = str_ireplace(":", "", $string);
-    $string = str_ireplace("¨", "", $string);
-    $string = str_ireplace("°", "", $string);
+    $string = str_ireplace("!", " ", $string);
+    $string = str_ireplace(".", " ", $string);
+    $string = str_ireplace(",,", " ", $string);
+    $string = str_ireplace("_", " ", $string);
+    $string = str_ireplace("-", " ", $string);
+    $string = str_ireplace("#", " ", $string);
+    $string = str_ireplace("$", " ", $string);
+    $string = str_ireplace("%", " ", $string);
+    $string = str_ireplace("(", " ", $string);
+    $string = str_ireplace(")", " ", $string);
+    $string = str_ireplace("!", " ", $string);
+    $string = str_ireplace("*", " ", $string);
+    $string = str_ireplace("¨", " ", $string);
+    $string = str_ireplace("¨", " ", $string);
+    $string = str_ireplace("]", " ", $string);
+    $string = str_ireplace("[", " ", $string);
+    $string = str_ireplace("{", " ", $string);
+    $string = str_ireplace("}", " ", $string);
+    $string = str_ireplace("¨", " ", $string);
+    $string = str_ireplace("¨", " ", $string);
+    $string = str_ireplace(":", " ", $string);
+    $string = str_ireplace("¨", " ", $string);
+    $string = str_ireplace("°", " ", $string);
     $string = str_ireplace("'", "´", $string);
     $string = str_ireplace("😂", "", $string);
     $string = str_ireplace("😀", "", $string);
@@ -1869,10 +1869,57 @@ function strClean($strCadena)
     $string = str_ireplace("🏳‍🌈", "", $string);
     $string = str_ireplace("🏳‍⚧", "", $string);
 
+    $string = str_ireplace("aaaaa", "aa", $string); 
+    $string = str_ireplace("eeeee", "ee", $string); 
+    $string = str_ireplace("iiiii", "ii", $string); 
+    $string = str_ireplace("ooooo", "oo", $string); 
+    $string = str_ireplace("uuuuu", "uu", $string); 
+
+    $string = str_ireplace("aaaa", "aa", $string); 
+    $string = str_ireplace("eeee", "ee", $string); 
+    $string = str_ireplace("iiii", "ii", $string); 
+    $string = str_ireplace("oooo", "oo", $string); 
+    $string = str_ireplace("uuuu", "uu", $string); 
 
 
+    $string = str_ireplace("aaa", "aa", $string); 
+    $string = str_ireplace("eee", "ee", $string); 
+    $string = str_ireplace("iii", "ii", $string); 
+    $string = str_ireplace("ooo", "oo", $string); 
+    $string = str_ireplace("uuu", "uu", $string);
 
+ 
+    $string = str_ireplace("qqqq", "q", $string);
+    $string = str_ireplace("qqq", "q", $string);
+    $string = str_ireplace("qq", "q", $string); 
 
+    $string = str_ireplace("wwww", "w", $string);
+    $string = str_ireplace("www", "w", $string);
+    $string = str_ireplace("ww", "w", $string);
+    
+    $string = str_ireplace("yyyy", "y", $string);
+    $string = str_ireplace("yyy", "y", $string);
+    $string = str_ireplace("yy", "y", $string);
+    
+    $string = str_ireplace("hhhh", "h", $string);
+    $string = str_ireplace("hhh", "h", $string);
+    $string = str_ireplace("hh", "h", $string);
+
+    $string = str_ireplace("jjjj", "j", $string);
+    $string = str_ireplace("jjj", "j", $string);
+    $string = str_ireplace("jj", "j", $string);
+
+    $string = str_ireplace("kkkk", "k", $string);
+    $string = str_ireplace("kkk", "k", $string);
+    $string = str_ireplace("kk", "k", $string);
+
+    $string = str_ireplace("xxxx", "x", $string);
+    $string = str_ireplace("xxx", "x", $string);
+    $string = str_ireplace("xx", "x", $string);
+
+    $string = str_ireplace("vvvv", "v", $string);
+    $string = str_ireplace("vvv", "v", $string);
+    $string = str_ireplace("vv", "v", $string);
 
     return $string;
 }
