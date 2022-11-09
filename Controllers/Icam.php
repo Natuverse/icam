@@ -276,44 +276,30 @@ class Icam extends Controllers
 
                                 </div>
                                 <br>
-                                <div id="answers" style="margin-top:20px">
+                                <div id="answers" style="margin-top:20px; width: 100%;">
                                     <div class="title" style="color: white; font-size:16px; font-weight:bold; margin-bottom: 8px;">SUGERENCIA DE RESPUESTAS</div>
-                                    <div class="itemAnswer" style="display:none">
-                                        <div id="answer1ES" class="text">
-                                            '.$response1_ES.'
-                                        </div>
-                                        <br>
-                                        <div id="answer1EN" class="text" style="font-weight: 100;">
-                                            '.$response1_EN.'
-                                        </div>
-                                        <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response1_EN.'" title="Copiar"/>
-                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response1_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
-                                    </div>
+                                    
+                                    <div class="flexH itemAnswer" style="padding-right: 0px;">
 
-                                    <div class="itemAnswer" style="padding-top:40px; height:68px">
-                                        <div id="answer2ES" class="text" style="width:80%">
-                                            '.$response2_ES.'
+                                        <div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
+                                            <div id="answer2ES" class="text flex1" style="display: block; color:#f900ff; margin-bottom: 10px;">
+                                                '.$response2_ES.'
+                                            </div>
+                                            <div id="answer2EN" class="text flex1" style="font-weight: 100; display: block;">
+                                                '.$response2_EN.'
+                                            </div>
+                                            
                                         </div>
-                                        <br>
-                                        <div id="answer2EN" class="text" style="font-weight: 100; width:80%">
-                                            '.$response2_EN.'
-                                        </div>
-                                        <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
                                         
-                                        <img style="width: 30px; float: right; display: inline-flex; cursor: pointer; margin-top: 10px; margin-right: -40px;" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
-                                    </div>
+                                        <div class="flex1 flexV">
+                                        
+                                            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
 
-                                    <div class="itemAnswer" style="display:none">
-                                        <div id="answer3ES" class="text">
-                                            '.$response3_ES.'
+                                            <img class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
                                         </div>
-                                        <br>
-                                        <div id="answer3EN" class="text" style="font-weight: 100;">
-                                            '.$response3_EN.'
-                                        </div>
-                                        <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response3_EN.'" title="Copiar"/>
-                                        <img style="display:none" class="iconFeelBack" src="https://devstec.digital/Assets/images/btn-feelback.png" data-response="'.$response3_EN.'" data-question="'.$message_EN.'" title="Reportar"/>
+                                        
                                     </div>
+                                    
                                 </div>';
 
                     $arrResponse = array('html' => $html, 'token' => $token);
