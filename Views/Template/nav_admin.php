@@ -48,11 +48,8 @@
                 <div class="collapse" id="collapseAnalisis" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="<?= base_url(); ?>/analisis">Palabras</a>
-                        <?php if (!empty($_SESSION['permisos'][MANALISIS]['r'])) {
-            ?>
-                        <a class="nav-link" href="<?= base_url(); ?>/analisis/oraciones">Oraciones</a>
-                        <?php } ?>
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis">Graficas</a>
+                       
                     </nav>
                 </div>
                 <?php } if (!empty($_SESSION['permisos'][MEMOCIONES]['r'])) {

@@ -12,9 +12,7 @@
 
 		<div >
 			<h1><i class="fa fa-user"></i><?= $data['page_title'] ?></h1>
-			<?php if ($_SESSION['permisosMod']['w']) { ?>
-				<button class="btn btn-primary" type="button" onclick="ejecutar();"><i class="fas fa-plus-circle"></i> Nuevo</button>
-			<?php } ?>
+			
 		</div>
 
 	</div>
@@ -24,26 +22,44 @@
 			<div class="tile">
 				<div class="tile-body">
 					<div class="table-responsive">
-						<table class="table table-hover table-bordered " style="width:100%" id="tablapalabras">
+						<div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="tile-body">
+					<div class="table-responsive">
+					<div class="table-responsive">
+						<table class="table table-hover table-bordered " style="width:100%" id="table_consultas">
 							<thead>
-								<tr>
-									<th>Id</th>
-									<th>Imagen</th>
-                                    <th>Palabra</th>
-									<th>Significado EN</th>
-									<th>Traduccion ES</th>
-									<th>Signidicado ES</th>
-									<th style="width:180px">Acciones</th>
+								<tr>									
+									<th>fecha</th>
+                                    <th>mensajes</th>
+									<th>Bot</th>								
 								</tr>
 							</thead>
 							<tbody>
 							</tbody>
 						</table>
 					</div>
+
+
+							
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 
 
