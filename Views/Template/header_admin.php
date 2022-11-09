@@ -13,7 +13,7 @@
     <link href="<?= media(); ?>/css/styles.css" rel="stylesheet">
     <link href="<?= media(); ?>/css/app.css" rel="stylesheet">
     <link href="<?= media(); ?>/js/all.min.js" crossorigin="anonymous">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     </script>
 </head>
 

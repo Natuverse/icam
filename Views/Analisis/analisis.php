@@ -25,6 +25,8 @@
 						<?php 
 
 
+						require_once("Libraries/jpgraph/jpgraph.php");
+						require_once("Libraries/jpgraph/jpgraph_line.php");
 					
 $datay1 = array(20,15,23,15);
 $datay2 = array(12,9,42,8);
@@ -59,7 +61,7 @@ $p1 = new LinePlot($datay1);
 $graph->Add($p1);
 $p1->SetColor("#6495ED");
 $p1->SetLegend('Line 1');
-
+/*
 // Create the second line
 $p2 = new LinePlot($datay2);
 $graph->Add($p2);
@@ -71,6 +73,8 @@ $p3 = new LinePlot($datay3);
 $graph->Add($p3);
 $p3->SetColor("#FF1493");
 $p3->SetLegend('Line 3');
+
+*/
 
 $graph->legend->SetFrameWeight(1);
 

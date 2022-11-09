@@ -1,7 +1,5 @@
 <?php
 
-require_once("Libraries/jpgraph/jpgraph.php");
-require_once("Libraries/jpgraph/jpgraph_line.php");
 
 class Analisis extends Controllers
 {
