@@ -315,11 +315,7 @@ class Icam extends Controllers
 
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
-<<<<<<< HEAD
-                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser, $message_EN, $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
-=======
                     $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
->>>>>>> 152914d16d7791bf094cfb9ccb5ca4651b717801
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
