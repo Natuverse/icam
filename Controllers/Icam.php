@@ -200,7 +200,7 @@ class Icam extends Controllers
                     $response3_ES = $arrayTranslation[3]['text'];
                 
                     // for feelings
-                    $params=['message'=>  strClean($_POST['message'])];
+                    $params=['message'=>  $message_EN ];
                     $defaults = array(
                     CURLOPT_URL => 'http://192.168.1.254:5000',
                     CURLOPT_RETURNTRANSFER => true,
@@ -315,7 +315,11 @@ class Icam extends Controllers
 
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+<<<<<<< HEAD
                     $request_log = $this->model->inserlog($idwebcam, 2, $iduser, $message_EN, $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
+=======
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
+>>>>>>> 152914d16d7791bf094cfb9ccb5ca4651b717801
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
