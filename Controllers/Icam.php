@@ -275,20 +275,28 @@ class Icam extends Controllers
                                     </div>
 
                                 </div>
-                                <br>
-                                <div id="answers" style="margin-top:20px; width: 100%;">
+                                <div id="answers" style="margin-top:10px; width: 100%;">
                                     <div class="title" style="color: white; font-size:16px; font-weight:bold; margin-bottom: 8px;">SUGERENCIA DE RESPUESTAS</div>
                                     
                                     <div class="flexH itemAnswer" style="padding-right: 0px;">
 
                                         <div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
-                                            <div id="answer2ES" class="text flex1" style="display: block; color:#f900ff; margin-bottom: 10px;">
-                                                '.$response2_ES.'
-                                            </div>
-                                            <div id="answer2EN" class="text flex1" style="font-weight: 100; display: block;">
-                                                '.$response2_EN.'
+                                        
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2ES" class="text" style="flex:20; display: block; text-align:left">
+                                                    '.$response2_ES.'
+                                                </div>
                                             </div>
                                             
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2EN" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
+                                                    '.$response2_EN.'
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <div class="flex1 flexV">
@@ -307,7 +315,7 @@ class Icam extends Controllers
 
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
-                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$_POST['message'], $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser, $message_EN, $response2_EN, $arrSentimiento[$sent]['idemocion_image'] );
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
