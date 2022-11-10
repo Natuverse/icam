@@ -13,6 +13,7 @@
     <link href="<?= media(); ?>/css/styles.css" rel="stylesheet">
     <link href="<?= media(); ?>/css/app.css" rel="stylesheet">
     <link href="<?= media(); ?>/js/all.min.js" crossorigin="anonymous">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     </script>
 </head>

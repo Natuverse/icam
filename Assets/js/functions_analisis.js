@@ -2,7 +2,6 @@
 let rowTable = "";
 
 document.addEventListener("DOMContentLoaded", function() {
-
     tableEmocion = $("#table_consultas").dataTable({
         bProcessing: true,
         bStateSave: true,
@@ -50,5 +49,59 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 }
 );
-  
+
+window.addEventListener(
+    "load",
+    function() {
+       loadgrap();
+    },
+    false
+);
+
+function loadgrap() {
+    let ajaxUrl = base_url + "/analisis/getdata";
+    let request = window.XMLHttpRequest ?
+        new XMLHttpRequest() :
+        new ActiveXObject("Microsoft.XMLHTTP");
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);           
+           
+            var dates = new Array();
+            var bot = new Array();
+            var msj =  new Array();
+            objData.forEach(function(element) {
+                dates.push(element.INI_BOT);
+                bot.push(element.COUNT_BOT);
+                msj.push(element.COUNT_MENS)
+              });
+
+            var data2 = {
+                x: dates,
+                y: bot,
+                type: 'scatter',       
+                name:'bot',
+              };
+              var data3 = {
+                x: dates,
+                y: msj,
+                type: 'scatter',
+                name: 'mjs'
+              };
+            
+        
+            var layout = {
+              title: 'Consultas vr tiempo',
+              uirevision:'true',
+              xaxis: {autorange: true},
+              yaxis: {autorange: true}
+            };
+        
+            var data = [data2, data3];
+            Plotly.newPlot(graphDiv, data, layout);
+        }
+    };
+}
    

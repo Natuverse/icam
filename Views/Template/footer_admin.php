@@ -30,6 +30,7 @@ const smony = "<?= SMONEY; ?>";
 <script src="<?= media(); ?>/js/plugins/sweetalert.js"></script>
 
 
+
 <script type="text/javascript" src="<?= media(); ?>/js/datatables/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?= media(); ?>/js/datatables/js/dataTables.bootstrap4.min.js"></script>
 
