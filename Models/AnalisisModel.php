@@ -32,6 +32,27 @@
 			$request = $this->select_all($sql);
 			return $request;
         }
+
+        public function getdatamin(){
+            $sql = "SELECT DATE_SUB(TO_CHAR(`tiempo` , 'YY/MM/DD HH24:MI'),INTERVAL 1 MINUTE) AS INI_BOT, COUNT(*) as COUNT_BOT 
+            from `log` 
+            WHERE tiempo BETWEEN '2022-10-31 00:00:00' AND NOW()  
+            GROUP by INI_BOT";
+
+
+			$request = $this->select_all($sql);
+			return $request;
+        }
+
+        public function getdataMensajesmin(){
+            $sql = "SELECT DATE_SUB(TO_CHAR(`tiempo`  , 'YY/MM/DD HH24:MI'),INTERVAL 1 MINUTE) AS INI_MENS, COUNT(*) as COUNT_MENS 
+            from `conversacion`
+            WHERE (tiempo BETWEEN '2022-10-31 00:00:00' AND NOW())  and `idmodelo`> 0
+            GROUP by INI_MENS";
+            
+			$request = $this->select_all($sql);
+			return $request;
+        }
       
 
 

@@ -48,7 +48,8 @@
                 <div class="collapse" id="collapseAnalisis" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="<?= base_url(); ?>/analisis">Graficas</a>
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis">Graficas horas</a>
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis/gramin">Graficas minutos</a>
                        
                     </nav>
                 </div>

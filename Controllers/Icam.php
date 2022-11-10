@@ -22,6 +22,16 @@ class Icam extends Controllers
 		//die();
 	}
 
+    public function prueba(){
+        $arrd   = $this->model->modelosdic();
+        //dep($arrd);
+        foreach($arrd as $arr){
+            print_r($arr);
+            $modelo = $this->model->udptemodel($arr['user']);
+        }
+        die();
+    }
+
 	public function chatbot()
     {
         if (!empty($_POST)) {
@@ -42,8 +52,6 @@ class Icam extends Controllers
                 $idwebcam =0;
                 if( $type ==2){
                     $idwebcam   = $this->model->consultarUsuario($webCam, $type);
-                }else{
-                    
                 }
                             
              

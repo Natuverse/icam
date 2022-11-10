@@ -40,7 +40,7 @@
 				VALUES(?,?)";
 				$arrData = array(
 					$this->strUser,
-					$this->intTyp
+					$this->intType
 					
 				);
 			
@@ -152,6 +152,27 @@
 			return $request;
 		}
 
+		public function modelosdic(){
+			$sql = "SELECT user FROM `log` WHERE tipo = 2";
+			
+			
+				$request = $this->select_all($sql);
+				
+			return $request;
+		}
+
+		public function udptemodel(int $idmodelo){
+
+
+			$this->idWebcam = $idmodelo;
+			$this->intType = 2;
+			$sql = "UPDATE usuariobot SET tipo = ? WHERE idusuariobot = $this->idWebcam";
+			$arrData = array(
+				$this->intType 
+			);
+			$request_update  = $this->update($sql, $arrData);
+			return $request_update;
+		}
         
         
 
