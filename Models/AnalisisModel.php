@@ -53,6 +53,26 @@
 			$request = $this->select_all($sql);
 			return $request;
         }
+
+        public function getdataMensajesBandeja(){
+            $sql = "SELECT DATE_SUB(TO_CHAR(`tiempo`  , 'YY/MM/DD HH24'),INTERVAL 1 HOUR) AS INI_BANDEJA, COUNT(*)  as COUNT_BANDEJA
+            from `log` 
+            WHERE user= 249 and (tiempo BETWEEN '2022-10-31 00:00:00' AND NOW()) 
+            GROUP by INI_BANDEJA";
+            
+			$request = $this->select_all($sql);
+			return $request;
+        }
+
+        public function getdataMensajesSinBandeja(){
+            $sql = "SELECT DATE_SUB(TO_CHAR(`tiempo`  , 'YY/MM/DD HH24'),INTERVAL 1 HOUR) AS INI_GENERAL, COUNT(*)  as COUNT_GENERAL
+            from `log` 
+            WHERE user != 249 and (tiempo BETWEEN '2022-10-31 00:00:00' AND NOW()) 
+            GROUP by INI_GENERAL";
+            
+			$request = $this->select_all($sql);
+			return $request;
+        }
       
 
 

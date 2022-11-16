@@ -41,8 +41,19 @@ class Analisis extends Controllers
       
 	}
 
+	public function bandeja()
+	{
+		
+		$data['page_tag'] = "ANALISIS - ICAM";
+		$data['page_title'] = "ANALISIS - ICAM";
+		$data['page_name'] = "ANALISIS";
+		$data['page_functions_js'] = "functions_analisis.js";
+		$this->views->getView($this, "bandeja", $data);
+      
+	}
+
 	public function getdata(){
-		if ($_SESSION['permisosMod']['r']) {
+	
 	
             $arrData = $this->model->getdatahoras();
 
@@ -67,12 +78,12 @@ class Analisis extends Controllers
 				$arrData[$i]['INI_BOT'] =strCleanlive( $arrData[$i]['INI_BOT']);
 			}
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
-        }
+       
         die();
 	}
 
 	public function getdatamin(){
-		if ($_SESSION['permisosMod']['r']) {
+		
 	
             $arrData = $this->model->getdatamin();
 
@@ -97,10 +108,21 @@ class Analisis extends Controllers
 				$arrData[$i]['INI_BOT'] =strCleanlive( $arrData[$i]['INI_BOT']);
 			}
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
-        }
+       
         die();
 	}
 
+
+	public function getdatDefault(){
+	
+	
+            $arrData['general'] = $this->model->getdataMensajesSinBandeja();
+
+			$arrData['bandeja'] = $this->model->getdataMensajesBandeja();
+            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+    
+        die();
+	}
   
 
 

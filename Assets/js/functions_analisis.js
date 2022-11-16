@@ -203,6 +203,62 @@ if (document.querySelector("#graphDivmin")) {
     };
 }
 
+if (document.querySelector("#graphDivBandeja")) {
+    let ajaxUrl = base_url + "/analisis/getdatDefault";
+    let request = window.XMLHttpRequest ?
+        new XMLHttpRequest() :
+        new ActiveXObject("Microsoft.XMLHTTP");
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);           
+            let general = objData.general;
+            let bandeja =  objData.bandeja;
+            var datesmsj = new Array();
+            var datesbandeja = new Array();
+            var bandejamsj = new Array();
+            var msj =  new Array();
+            general.forEach(function(element) {
+                datesmsj.push(element.INI_GENERAL);              
+                msj.push(element.COUNT_GENERAL)
+              });
+
+              bandeja.forEach(function(element) {
+                datesbandeja.push(element.INI_BANDEJA);              
+                bandejamsj.push(element.COUNT_BANDEJA)
+              });
+
+          var data2 = {
+                x: datesmsj,
+                y: msj,
+                type: 'scatter',       
+                name:'General',
+              };
+
+            
+
+              var data3 = {
+                x: datesbandeja,
+                y: bandejamsj,
+                type: 'scatter',
+                name: 'Bandeja'
+              };
+            
+        
+            var layout = {
+              title: 'Consultas vr tiempo',
+              uirevision:'true',
+              xaxis: {autorange: true},
+              yaxis: {autorange: true}
+            };
+            var myPlot = document.getElementById('graphDivBandeja');
+            var data = [data2, data3];
+            Plotly.newPlot(myPlot, data, layout);
+        }
+    };
+}
+
 
 }
    

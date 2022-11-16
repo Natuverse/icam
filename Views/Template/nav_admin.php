@@ -49,8 +49,8 @@
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="<?= base_url(); ?>/analisis">Graficas horas</a>
-                        <a class="nav-link" href="<?= base_url(); ?>/analisis/gramin">Graficas minutos</a>
-                       
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis/gramin">Graficas minutos</a>                       
+                        <a class="nav-link" href="<?= base_url(); ?>/analisis/bandeja">Bandeja</a>
                     </nav>
                 </div>
                 <?php } if (!empty($_SESSION['permisos'][MEMOCIONES]['r'])) {
