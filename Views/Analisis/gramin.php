@@ -40,7 +40,7 @@
 								<tr>									
 									<th>fecha</th>
                                     <th>mensajes</th>
-									<th>Bot</th>								
+									<th>ICAM</th>								
 								</tr>
 							</thead>
 							<tbody>

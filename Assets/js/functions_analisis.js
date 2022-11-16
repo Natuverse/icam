@@ -133,7 +133,7 @@ function loadgrap() {
                 x: dates,
                 y: bot,
                 type: 'scatter',       
-                name:'bot',
+                name:'icam',
               };
               var data3 = {
                 x: dates,
@@ -180,7 +180,7 @@ if (document.querySelector("#graphDivmin")) {
                 x: dates,
                 y: bot,
                 type: 'scatter',       
-                name:'bot',
+                name:'icam',
               };
               var data3 = {
                 x: dates,
