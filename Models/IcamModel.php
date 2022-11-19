@@ -13,7 +13,7 @@
 		private $intId_emocion;
 		private $strrespuesta;
 		private $intIDemocion;
-		//private $inttypechat;
+		
 
         
 		public function __construct()
@@ -120,7 +120,7 @@
 			$this->sttMensaje= $pregunta;
 			$this->strrespuesta=  $respuesta;
 			$this->intIDemocion = $idemocion;
-			//$this-> inttypechat =  $typechat;
+			
 		
 		    $query_insert  = "INSERT INTO log(model, tipo, user, pregunta, respuesta, idemocion)
 				VALUES(?,?,?, ?,?,?)";
@@ -130,8 +130,7 @@
                     $this->intIdUser,
 					$this->sttMensaje,
 					$this->strrespuesta,
-					$this->intIDemocion
-					
+					$this->intIDemocion				
 					
 				);
 			

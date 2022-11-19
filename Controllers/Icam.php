@@ -320,21 +320,12 @@ class Icam extends Controllers
                                 </div>';
 
                     $arrResponse = array('html' => $html, 'token' => $token);
-                    $typechat =   0;
-                    /*
-                    if(empty($_POST['typechat']) || !isset($_POST['typechat']) ){
-                        $typechat =   0;  
-                        
-                    }else{
-                        $typechat =   intval($_POST['typechat']);   
-                        
-                    }
-                    */
+                 
 
                     
-                    $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
-                    $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
-                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image']);
+                   // $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
+                   // $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+                   // $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image']);
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
