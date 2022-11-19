@@ -13,7 +13,7 @@
 		private $intId_emocion;
 		private $strrespuesta;
 		private $intIDemocion;
-		
+		//private $inttypechat;
 
         
 		public function __construct()
@@ -111,7 +111,7 @@
 			return $request;
 		}
 
-		public function inserlog( int $iduser, int $type, Int $cliente, String $pregunta,  String $respuesta, int $idemocion){
+		public function inserlog( int $iduser, int $type, Int $cliente, String $pregunta,  String $respuesta, int $idemocion, int $typechat){
 			
 
 			$this->idWebcam = $iduser;
@@ -120,17 +120,18 @@
 			$this->sttMensaje= $pregunta;
 			$this->strrespuesta=  $respuesta;
 			$this->intIDemocion = $idemocion;
-			
+			$this-> inttypechat =  $typechat;
 		
 		    $query_insert  = "INSERT INTO log(model, tipo, user, pregunta, respuesta, idemocion)
-				VALUES(?,?,?, ?,?,?)";
+				VALUES(?,?,?, ?,?,?, ?)";
 				$arrData = array(
 					$this->idWebcam,
 					$this->intType,
                     $this->intIdUser,
 					$this->sttMensaje,
 					$this->strrespuesta,
-					$this->intIDemocion				
+					$this->intIDemocion,
+					$this-> inttypechat
 					
 				);
 			
