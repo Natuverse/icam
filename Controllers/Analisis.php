@@ -30,27 +30,30 @@ class Analisis extends Controllers
       
 	}
 
-	public function gramin()
+	public function modelos()
 	{
 		
 		$data['page_tag'] = "ANALISIS - ICAM";
 		$data['page_title'] = "ANALISIS - ICAM";
 		$data['page_name'] = "ANALISIS";
 		$data['page_functions_js'] = "functions_analisis.js";
-		$this->views->getView($this, "gramin", $data);
+		$this->views->getView($this, "modelos", $data);
       
 	}
 
-	public function bandeja()
+	public function modelo($model)
 	{
 		
 		$data['page_tag'] = "ANALISIS - ICAM";
 		$data['page_title'] = "ANALISIS - ICAM";
 		$data['page_name'] = "ANALISIS";
 		$data['page_functions_js'] = "functions_analisis.js";
-		$this->views->getView($this, "bandeja", $data);
+		$data['modelo']=$model;
+		$this->views->getView($this, "modelo", $data);
       
 	}
+
+
 
 	public function getdata(){
 	
@@ -82,6 +85,36 @@ class Analisis extends Controllers
         die();
 	}
 
+	public function getdataModelo($modelo){
+	
+	
+		$arrData = $this->model->getdatahorasModelo($modelo);
+
+		$arrDataMensjaes = $this->model->getdataMensajeshorasModelo($modelo);
+
+	
+		for ($i = 0; $i < count($arrData); $i++) {
+			$dato = false;
+			for ($j = 0; $j < count($arrDataMensjaes); $j++) {
+				
+				if($arrData[$i]['INI_BOT']==$arrDataMensjaes[$j]['INI_MENS']){
+					$dato = true;
+					
+						$arrData[$i]['COUNT_MENS']=$arrDataMensjaes[$j]['COUNT_MENS'];
+						$arrData[$i]['INI_MENS']=$arrDataMensjaes[$j]['INI_MENS'];
+				
+				}
+			}
+			if(!$dato){
+				$arrData[$i]['COUNT_MENS'] = 0;
+			}
+			$arrData[$i]['INI_BOT'] =strCleanlive( $arrData[$i]['INI_BOT']);
+		}
+		echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+   
+	die();
+}
+
 	public function getdatamin(){
 		
 	
@@ -112,6 +145,38 @@ class Analisis extends Controllers
         die();
 	}
 
+	public function getdataminmodelo($modelo){
+		
+	
+		$arrData = $this->model->getdataminmodelo($modelo);
+
+		$arrDataMensjaes = $this->model->getdataMensajesminmodelo($modelo);
+
+	
+		for ($i = 0; $i < count($arrData); $i++) {
+			$dato = false;
+			for ($j = 0; $j < count($arrDataMensjaes); $j++) {
+				
+				if($arrData[$i]['INI_BOT']==$arrDataMensjaes[$j]['INI_MENS']){
+					$dato = true;
+					
+						$arrData[$i]['COUNT_MENS']=$arrDataMensjaes[$j]['COUNT_MENS'];
+						$arrData[$i]['INI_MENS']=$arrDataMensjaes[$j]['INI_MENS'];
+				
+				}
+			}
+			if(!$dato){
+				$arrData[$i]['COUNT_MENS'] = 0;
+			}
+			$arrData[$i]['INI_BOT'] =strCleanlive( $arrData[$i]['INI_BOT']);
+		}
+		echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+   
+	die();
+}
+
+
+	
 
 	public function getdatDefault(){
 	
@@ -122,6 +187,29 @@ class Analisis extends Controllers
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
     
         die();
+	}
+
+	public function getmodel(){
+		$arrData = $this->model->getmodel();
+
+		for ($i = 0; $i < count($arrData); $i++) {
+		$btnView = '';
+		$btnEdit = '';
+		$btnDelete = '';
+
+		   
+
+		$btnView .= '<a class="nav-link" href="'.base_url().'/analisis/modelo/'. $arrData[$i]['model'].'"><i class="far fa-eye"></i></a>';
+
+		$arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
+		}
+		
+		
+
+		
+		echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+
+	die();
 	}
   
 

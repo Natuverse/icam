@@ -17,16 +17,6 @@
 
 	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="tile">
-				<div class="tile-body">
-					<div id="graphDivmin"></div>
-                   
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<div class="row">
@@ -35,12 +25,13 @@
 				<div class="tile-body">
 					<div class="table-responsive">
 					<div class="table-responsive">
-						<table class="table table-hover table-bordered " style="width:100%" id="table_consultas_min">
+						<table class="table table-hover table-bordered " style="width:100%" id="table_modelos">
 							<thead>
 								<tr>									
-									<th>fecha</th>
-                                    <th>mensajes</th>
-									<th>ICAM</th>								
+								
+                                    <th>Modelos</th>
+									<th>consultas</th>	
+									<th>opciones</th>								
 								</tr>
 							</thead>
 							<tbody>
