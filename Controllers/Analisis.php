@@ -148,16 +148,16 @@ class Analisis extends Controllers
 	public function getdataminmodelo($modelo){
 		
 	
-		$arrData = $this->model->getdataminmodelo($modelo);
+		$arrDataN['mensajes'] = $this->model->getdataminmodelo($modelo);
 
-		$arrDataMensjaes = $this->model->getdataMensajesminmodelo($modelo);
+		$arrDataMensjaes['icam'] = $this->model->getdataMensajesminmodelo($modelo);
 
 	
 		for ($i = 0; $i < count($arrData); $i++) {
 			$dato = false;
 			for ($j = 0; $j < count($arrDataMensjaes); $j++) {
 				
-				if($arrData[$i]['INI_BOT']==$arrDataMensjaes[$j]['INI_MENS']){
+				if(strCleanlive( $arrData[$i]['INI_BOT'])==strCleanlive( $arrDataMensjaes[$j]['INI_MENS'])){
 					$dato = true;
 					
 						$arrData[$i]['COUNT_MENS']=$arrDataMensjaes[$j]['COUNT_MENS'];

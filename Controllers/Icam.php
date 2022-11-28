@@ -125,7 +125,7 @@ class Icam extends Controllers
                     if(empty($_POST['token'])){
                         $token = $this->login($_POST['girl']);
                         $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
-                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0 );
+                       // $request_log = $this->model->inserlog($iduser, 1, 0, "","",0 );
                         
                         if($token == 'none'){
                             $this->signup($_POST['girl']);
