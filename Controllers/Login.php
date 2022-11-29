@@ -63,7 +63,7 @@
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
 				}else{
 					$token = token();
-					$strEmail  =  strtolower(strClean($_POST['txtEmailReset']));
+					$strEmail  =  strtolower(strCleanlive($_POST['txtEmailReset']));
 					$arrData = $this->model->getUserEmail($strEmail);
 
 					if(empty($arrData)){
@@ -106,8 +106,8 @@
 				header('Location: '.base_url());
 			}else{
 				$arrParams = explode(',',$params);
-				$strEmail = strClean($arrParams[0]);
-				$strToken = strClean($arrParams[1]);
+				$strEmail = strCleanlive($arrParams[0]);
+				$strToken = strCleanlive($arrParams[1]);
 				$arrResponse = $this->model->getUsuario($strEmail,$strToken);
 				if(empty($arrResponse)){
 					header("Location: ".base_url());
@@ -135,8 +135,8 @@
 					$intIdpersona = intval($_POST['idUsuario']);
 					$strPassword = $_POST['txtPassword'];
 					$strPasswordConfirm = $_POST['txtPasswordConfirm'];
-					$strEmail = strClean($_POST['txtEmail']);
-					$strToken = strClean($_POST['txtToken']);
+					$strEmail = strCleanlive($_POST['txtEmail']);
+					$strToken = strCleanlive($_POST['txtToken']);
 
 					if($strPassword != $strPasswordConfirm){
 						$arrResponse = array('status' => false, 

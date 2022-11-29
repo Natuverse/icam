@@ -100,24 +100,31 @@ INSERT INTO `usuario` (`idusuario`, `avatar`, `fechad_creacion`, `id_tipo_docume
 (3, 'fotoRegistro.jpg', NULL, NULL, NULL, '5bd7b41c7439d5fb38939b0786788ccd9000f71ed76d4c7f1a8439549e73d31fb1e317547d8281fc60b1a2bda8476112f4beb4545507502979655dd608409ec6', 'Fabian', 'Moya', '3186036909', NULL, 'fmoya868@gmail.com', 2, 1, NULL, NULL);
 
 
+create table nivel_ingles(
+idnivel_ingles int not null auto_increment,
+primary key (idnivel_ingles),
+nivel_ingles varchar (255)
+);
+
+INSERT INTO `nivel_ingles` (`idnivel_ingles`, `nivel_ingles`) VALUES
+(1, "Basico"),
+(2, "Intermedio"),
+(3, "Avanzado");
+
+
+
+
 create table usuariobot(
 idusuariobot bigint not null auto_increment,
 primary key (idusuariobot),
 nombre varchar (50),
-tipo int 
+tipo int,
+edad int,
+fecha_creacion datetime default current_timestamp,
+fecha_inicio datetime,
+nivel_ingles int
 );
 
-create table log(
-idlog bigint not null auto_increment,
-primary key(idlog),
-model bigint,
-tipo int,
-tiempo datetime default current_timestamp,
-user bigint,
-pregunta longtext,
-respuesta longtext,
-idemocion int 
-);
 
 create table conversacion(
 idconversacion bigint not null auto_increment,
@@ -140,13 +147,6 @@ traduccion_es longtext,
 significado_es  longtext,
 image longtext
 );
-
-
-
-
-
-
-
 
 
 
@@ -197,6 +197,18 @@ abreviacion varchar (100),
 palabra varchar (100)
 );
 
+create table log(
+idlog bigint not null auto_increment,
+primary key(idlog),
+model bigint,
+tipo int,
+tiempo datetime default current_timestamp,
+user bigint,
+pregunta longtext,
+respuesta longtext,
+idemocion int, 
+typechat int default 0 
+);
 
 
 

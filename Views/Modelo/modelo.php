@@ -1,5 +1,5 @@
 <?php headerAdmin($data);
-//getModal('modalAnalisis', $data);
+getModal('modalModelo', $data);
 ?>
 
 
@@ -17,6 +17,8 @@
 
 	</div>
 
+	
+
 
 
 	<div class="row">
@@ -29,7 +31,12 @@
 							<thead>
 								<tr>									
 								
+                                    <th>id</th>
                                     <th>Modelos</th>
+                                    <th>Edad</th>
+                                    <th>Antiguedad</th>
+                                    <th>Creacion</th>
+                                    <th>Nivel de Ingles</th>
 									<th>consultas</th>	
 									<th>opciones</th>								
 								</tr>
