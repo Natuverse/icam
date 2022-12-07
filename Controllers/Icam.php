@@ -125,8 +125,8 @@ class Icam extends Controllers
                     if(empty($_POST['token'])){
                         $token = $this->login($_POST['girl']);
                         $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
-                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0 );
-                        
+                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0,0 );
+                
                         if($token == 'none'){
                             $this->signup($_POST['girl']);
                             $token = $this->login($_POST['girl']);
@@ -135,6 +135,8 @@ class Icam extends Controllers
                         $token = $_POST['token'];
                        
                     }
+                    
+                    
 
                     $words = explode(" ", $message_EN);
                     $cadena ="";
@@ -317,7 +319,14 @@ class Icam extends Controllers
                                         
                                     </div>
                                     
+                                </div>
+                                
+                                <div id="iconsFeelback">
+                                    <img src="https://devstec.digital/Assets/images/btn-good.png" data-question="" data-answer="" data-qualification="GOOD" title="Respuesta buena" />
+                                    <img src="https://devstec.digital/Assets/images/btn-bad.png" data-question="" data-answer="" data-qualification="BAD" title="Respuesta mala" />
                                 </div>';
+
+                                
 
                     $arrResponse = array('html' => $html, 'token' => $token);
                     $typechat =   0;
@@ -329,11 +338,11 @@ class Icam extends Controllers
                         $typechat =   intval($_POST['typechat']);   
                         
                     }
-
+			
                     
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
-                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'],  $typechat);
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'],  0);
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
