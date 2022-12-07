@@ -26,6 +26,7 @@
 		const MDICCIONARIO =4;
 		const MANALISIS =5;
 		const MEMOCIONES =6;
+		const MMODELOS = 7;
 
 
 		const NOMBRE_REMITENTE = "ICAM";

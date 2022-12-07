@@ -122,7 +122,7 @@
 			$this->intIDemocion = $idemocion;
 			$this-> inttypechat =  $typechat;
 		
-		    $query_insert  = "INSERT INTO log(model, tipo, user, pregunta, respuesta, idemocion)
+		    $query_insert  = "INSERT INTO log(model, tipo, user, pregunta, respuesta, idemocion, typechat)
 				VALUES(?,?,?, ?,?,?, ?)";
 				$arrData = array(
 					$this->idWebcam,

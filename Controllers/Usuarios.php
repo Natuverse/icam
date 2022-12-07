@@ -112,7 +112,7 @@
 					
 					
 					if($_POST['password'] == $_POST['rep_password']){
-						$password = strClean($_POST['password']);
+						$password = strCleanlive($_POST['password']);
 						$pass  =  hash("sha512", $password);
 					}else{
 						$arrResponse = array("status" => false,  "msg" => 'Password incorrecto.');
@@ -125,12 +125,12 @@
 				
 
 				
-				$nombres = ucwords(strClean($_POST['nombres']));
-				$apellidos = ucwords(strClean($_POST['apellidos']));
+				$nombres = ucwords(strCleanlive($_POST['nombres']));
+				$apellidos = ucwords(strCleanlive($_POST['apellidos']));
 				
-				$celular  = intval(strClean($_POST['telefono_movil']));
+				$celular  = intval(strCleanlive($_POST['telefono_movil']));
 				
-				$correo = strtolower(strClean($_POST['correo']));
+				$correo = strtolower(strCleanlive($_POST['correo']));
 				$rolid = intval($_POST['rol_form']);
 
 		
@@ -252,7 +252,7 @@
 			
 			
 				if($_POST['passwordu'] == $_POST['rep_passwordu']){
-					$password = strClean($_POST['passwordu']);
+					$password = strCleanlive($_POST['passwordu']);
 					$pass  =  hash("sha512", $password);
 				}else{
 					$arrResponse = array("status" => false,  "msg" => 'Password incorrecto.');

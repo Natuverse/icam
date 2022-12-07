@@ -117,6 +117,21 @@ function deleteFile(string $name, string $folder)
     }
 }
 
+function cleanFecha($strCadena){
+   // $string = date("d-m-Y ", strtotime($string));
+ 
+
+    //
+    $string = preg_replace(['/\s+/', '/^\s|\s$/'], [' ', ''], $strCadena);
+    //$string = trim($string);
+    $string = str_ireplace("00:00:00", "", $string);
+    $string = trim($string);
+   // $string = implode('-', array_reverse(explode('-', $string)));
+    //$string = str_ireplace("-", "/", $string);
+
+    return $string;
+}
+
 
 function strCleanlive($strCadena){
     $string = preg_replace(['/\s+/', '/^\s|\s$/'], [' ', ''], $strCadena);
