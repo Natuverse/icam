@@ -34,12 +34,12 @@ class Icam extends Controllers
 
     public function feelback(){
         if (!empty($_POST)) {
-            if(empty($_POST['question']) || empty($_POST['answer']) || empty($_POST['qualification']) ){
+            if(empty($_POST['question']) || empty($_POST['answer'])  ){
                 $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
             }else{
                 $question  =  strtolower(strCleanlive($_POST['question']));
                 $answer  =  strtolower(strCleanlive($_POST['answer']));
-                $qualification  =  strtolower(strCleanlive($_POST['qualification']));
+                $qualification  =  ($_POST['qualification']);
                 
                 $requestfeelback = $this->model->feelback($question, $answer, $qualification);
                 
