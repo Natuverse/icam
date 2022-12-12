@@ -14,8 +14,8 @@
 		private $strrespuesta;
 		private $intIDemocion;
 		//private $inttypechat;
-		private $srttext_question;
-		private $srttext_answer;
+		private $srtquestion;
+		private $srtanswer;
 		private $intqualification;
 
         
@@ -88,19 +88,19 @@
 			
 		}
 
-		public function feelback(String $text_question,String $text_answer,Int $qualification){
+		public function feelback(String $question,String $answer,Int $qualification){
 			
-			$this->srttext_question;
-			$this->srttext_answer;
-			$this->intqualification;
+			$this->srtquestion= $question;
+			$this->srtanswer = $answer;
+			$this->intqualification = $qualification;
 
 	
 			
-		    $query_insert  = "INSERT INTO feelback(text_question, text_answer, qualification)
+		    $query_insert  = "INSERT INTO feelback(question, answer, qualification)
 				VALUES(?,?,?)";
 				$arrData = array(
-					$this->srttext_question,
-					$this->srttext_answer,
+					$this->srtquestion,
+					$this->srtanswer,
                     $this->intqualification
 					
 				);
