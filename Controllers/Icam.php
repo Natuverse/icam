@@ -346,8 +346,8 @@ class Icam extends Controllers
                                 </div>
                                 
                                 <div id="iconsFeelback">
-                                    <img src="https://devstec.digital/Assets/images/btn-good.png" data-question="" data-answer="" data-qualification="GOOD" title="Respuesta buena" />
-                                    <img src="https://devstec.digital/Assets/images/btn-bad.png" data-question="" data-answer="" data-qualification="BAD" title="Respuesta mala" />
+                                    <img src="https://devstec.digital/Assets/images/btn-good.png" data-question="'.$message_EN.'" data-answer="'.$response2_EN.'" data-qualification="1" title="Respuesta buena" />
+                                    <img src="https://devstec.digital/Assets/images/btn-bad.png" data-question="'.$message_EN.'" data-answer="'.$response2_EN.'" data-qualification="0" title="Respuesta mala" />
                                 </div>';
 
                                 
