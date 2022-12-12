@@ -14,6 +14,9 @@
 		private $strrespuesta;
 		private $intIDemocion;
 		//private $inttypechat;
+		private $srttext_question;
+		private $srttext_answer;
+		private $intqualification;
 
         
 		public function __construct()
@@ -75,6 +78,30 @@
                     $this->idWebcam,
 					$this->intprivate,
 					$this->intvoice
+					
+				);
+			
+				$request_insert = $this->insert($query_insert, $arrData);
+				$return = $request_insert;
+			
+			return $return;
+			
+		}
+
+		public function feelback(String $text_question,String $text_answer,Int $qualification){
+			
+			$this->srttext_question;
+			$this->srttext_answer;
+			$this->intqualification;
+
+	
+			
+		    $query_insert  = "INSERT INTO feelback(text_question, text_answer, qualification)
+				VALUES(?,?,?)";
+				$arrData = array(
+					$this->srttext_question,
+					$this->srttext_answer,
+                    $this->intqualification
 					
 				);
 			
