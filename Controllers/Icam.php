@@ -98,6 +98,17 @@ class Icam extends Controllers
 
     }
 
+    public function fine(){
+        $request= $this->model->consullog();
+       // $requestdelete = $this->deteletefine();
+        for ($i = 0; $i < count($request); $i++) {
+           
+            $requestquestion = $this->model->insetQuestion(strClean($request[$i]['pregunta']), strClean($request[$i]['respuesta']),$request[$i]['cant'] );
+         
+        }
+        die();
+    }
+
     function detectLanguage($text){
         $words = explode(" ", $text);
         if (count($words) > 3) {
@@ -534,6 +545,8 @@ class Icam extends Controllers
         
         return $array['translations'];
     }
+
+   
 }
 
 

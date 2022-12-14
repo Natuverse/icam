@@ -213,6 +213,23 @@ typechat int default 0
 
 
 
+create table feelback(
+idfeelback bigint not null auto_increment,
+primary key (idfeelback),
+question longtext,
+answer longtext,
+qualification int 
+); 
+
+
+create table fine(
+idfine bigint  not null auto_increment,
+primary key (idfine),
+pregunta longtext,
+respuesta longtext,
+cant int 
+);
+
 
 
 

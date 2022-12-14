@@ -12,6 +12,7 @@
 		private $srtword;
 		private $intId_emocion;
 		private $strrespuesta;
+		private $intCant;
 		private $intIDemocion;
 		//private $inttypechat;
 		private $srtquestion;
@@ -124,6 +125,45 @@
 			return $request;
 			
 		}
+
+		public function consullog( ){			
+
+			
+			$sql = "SELECT pregunta, max(respuesta) as respuesta, count(pregunta) as cant FROM log where pregunta != '' and pregunta != ' ' and pregunta != '  ' and pregunta != '   ' and pregunta != '   ' group by pregunta";
+			
+			
+				$request = $this->select_all($sql);
+				
+			return $request;
+			
+		}
+
+		public function deteletefine (){
+			$sql = " delete from fine";
+			$request = $this->delete($sql);
+			return $request;
+		} 
+
+		public function insetQuestion(String $mensaje, String $respuesta, Int $cant){
+
+			$this->sttMensaje = $mensaje;
+			$this->strrespuesta=  $respuesta;
+			$this->intCant = $cant;
+			$query_insert  = "INSERT INTO fine(pregunta, respuesta, cant)
+			VALUES(?,?,?)";
+			$arrData = array(
+				$this->sttMensaje,
+				$this->strrespuesta,
+				$this->intCant
+				
+			);
+		
+			$request_insert = $this->insert($query_insert, $arrData);
+			$return = $request_insert;
+		
+		return $return;
+		}
+
 
 		public function consultarEmociones(int $id_emocion){
 			$this->intId_emocion = $id_emocion;
