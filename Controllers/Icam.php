@@ -545,6 +545,11 @@ class Icam extends Controllers
         
         return $array['translations'];
     }
+    
+    function onlyTranslate(){
+        $array = $this->translateTo($_POST['message'], "EN");
+        echo $array[0]['text'];
+    }
 
    
 }
