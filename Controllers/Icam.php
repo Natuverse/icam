@@ -387,6 +387,445 @@ class Icam extends Controllers
         
     }
 
+    public function sentimiento()
+    {
+        if (!empty($_POST)) {
+            
+            if(empty($_POST['message']) || empty($_POST['girl'])){
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+                
+            }else{
+              
+              
+                    $message_EN  =  strClean($_POST['message']);
+                    /*$language = $this->detectLanguage($message_EN);
+                    //var_dump($language);
+                    
+                    if($language != "EN"){
+                        $message_EN = $this->translateTo($message_EN, 'EN')[0]['text'];
+                    }*/
+                    
+                    $html = '';
+
+                  
+                    
+                    if(empty($_POST['token'])){
+                        $token = $this->login($_POST['girl']);
+                        $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
+                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0,0 );
+                
+                        if($token == 'none'){
+                            $this->signup($_POST['girl']);
+                            $token = $this->login($_POST['girl']);
+                        }
+                    }else{
+                        $token = $_POST['token'];
+                       
+                    }
+                    
+                    
+
+                    $words = explode(" ", $message_EN);
+                    $cadena ="";
+                    $html2 = "";
+
+                    $temp =0;
+                $double = true;
+                //dep($words[0]);
+                $cat =  count($words)-1 ;
+               
+
+                for($i = 0; $i < count($words); ++$i) {
+                    $request =0;
+                    $requestcom = 0;
+                    $requestabre = $this->model->consulAbre($words[$i]);
+                    if(sizeof($requestabre) > 0 ){
+                        
+                        $words[$i] =   $requestabre[0]['palabra'];                   
+                        $cadena.=$words[$i]." ";
+                    }else{
+                        $cadena.=$words[$i]." ";
+                        //$html.=$word." ";
+                    }  
+                    $request = $this->model->consultDiccionario($words[$i]);
+                    $temp = $i;
+                   
+                    if($i< $cat){
+                        $i++;
+                       // echo $words[$temp]."\n";
+                       // echo $words[$i]."\n";
+                        $word = $words[$temp]." ".$words[$i];
+                       // echo $word;
+                        $requestcom = $this->model->consultDiccionario($word);
+                    }else{
+                        $requestcom = $this->model->consultDiccionario("");
+                    }
+                   
+                   
+                    //print_r($requestcom);
+                    if(sizeof($request) > 0 ){
+                        //$cadena.=$request[0]['palabra'];
+                        if($double){
+                            $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$request[0]['significado_es'].'">'.$words[$temp].'</span> ';
+                        }else{
+                            $double = true;
+                        }
+                     
+                       // echo sizeof($requestcom);
+                    }else if(sizeof($requestcom) > 0){
+                        $double = false;
+                        //$cadena.=$word." ";
+                        $html2.='<span class="link" data-image="'.media().'/images/iconicam.png" data-text="'.$requestcom[0]['significado_es'].'">'.$words[$temp]." ".$words[$i].'</span> ';
+                      
+                    } else{
+                        if( $double){
+                            $html2.=$words[$temp]." ";
+                        }
+                       
+                    }
+                    $i = $temp;
+                }
+                    $message_EN = $cadena;           
+                    $response1_EN = "";
+                    $response2_EN = $this->chat($token, $message_EN);
+                    $response3_EN = "";
+                        
+                    $arrayTranslation = $this->translate(strtolower($message_EN), $response1_EN, $response2_EN, $response3_EN);
+
+                    $message_ES = $arrayTranslation[0]['text'];
+                    $response1_ES = $arrayTranslation[1]['text'];
+                    $response2_ES = $arrayTranslation[2]['text'];
+                    $response3_ES = $arrayTranslation[3]['text'];
+                
+                    // for feelings
+                    $params=['message'=>  $message_EN ];
+                    $defaults = array(
+                    CURLOPT_URL => 'http://192.168.1.254:5000',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $params,
+                    );
+                    $ch = curl_init();
+                    curl_setopt_array($ch, $defaults);
+
+                    $result2 = curl_exec($ch);
+
+                    curl_close($ch);
+
+                    $array = json_decode($result2, true);
+
+                    $words2 =  $array['traduccion']['text'];
+
+                    $array = $array['sentimiento'][0];
+
+                    $aux=0;
+                    $max=0;
+
+                    for($i=0; $i<count($array); $i++){
+
+                        if($array[$i]['score']>$aux){
+                            $aux =$array[$i]['score'];
+                            $max = $i;
+                        }
+                    }
+
+                    $max++;
+
+                    $arrSentimiento = $this->model->consultarEmociones($max);
+
+                    $sent= rand(0, count($arrSentimiento));
+                
+                
+                    
+                    $html .= '<div class="titleBar">
+                                    <div id="nameUser" class="bigTitle">'.$_POST['user'].'</div>
+                                    <div id="preferences">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="flexH alignT">
+                                    <div class="flex1 box">
+                                        <div class="titleTag">TRASLATE</div>
+                                        <p id="testSpanish">
+                                            '.$message_ES.'
+                                        </p>
+                                        <div class="toRight">
+                                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
+                                        </div>
+                                    </div>
+
+                                    <div class="flex1 box">
+                                        <div class="titleTag">ORIGINAL</div>
+                                        <p id="textEnglish">
+                                            '.$html2.'
+                                        </p>
+                                        <div class="toRight">
+                                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
+                                        </div>
+                                    </div>
+
+                                    <div class="flex1">
+                                        <div class="backgroundColors">
+                                            <div class="bigTitle">'.$arrSentimiento[$sent]['emocion_es'] .'</div>
+                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['emocion_es'].'" />
+                                            <div class="text" style="font-size: 12px; font-weight:100">'.$arrSentimiento[$sent]['descripcion'] .'</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                               
+                               ';
+
+                                
+
+                    $arrResponse = array('html' => $html, 'token' => $token);
+                    $typechat =   0;
+                    
+                    if(empty($_POST['typechat']) || !isset($_POST['typechat']) ){
+                        $typechat =   0;  
+                        
+                    }else{
+                        $typechat =   intval($_POST['typechat']);   
+                        
+                    }
+			
+                    
+                    $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
+                    $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'],  0);
+                    
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+     
+        die();
+        
+    }
+    public function bot1()
+    {
+        if (!empty($_POST)) {
+            
+            if(empty($_POST['message']) || empty($_POST['girl'])){
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+                
+            }else{
+              
+              
+                    $message_EN  =  strClean($_POST['message']);
+                   
+                    $html = '';
+
+                  
+                    
+                    if(empty($_POST['token'])){
+                        $token = $this->login($_POST['girl']);
+                        $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
+                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0,0 );
+                
+                        if($token == 'none'){
+                            $this->signup($_POST['girl']);
+                            $token = $this->login($_POST['girl']);
+                        }
+                    }else{
+                        $token = $_POST['token'];
+                       
+                    }
+                    
+                    
+
+                    $words = explode(" ", $message_EN);
+                    $cadena ="";
+                    $html2 = "";
+
+                    $temp =0;
+                $double = true;
+                //dep($words[0]);
+                $cat =  count($words)-1 ;
+               
+
+               
+                    $message_EN = $cadena;           
+                    $response1_EN = "";
+                    $response2_EN = $this->chat($token, $message_EN);
+                    $response3_EN = "";
+                        
+                    $arrayTranslation = $this->translate(strtolower($message_EN), $response1_EN, $response2_EN, $response3_EN);
+
+                    $message_ES = $arrayTranslation[0]['text'];
+                    $response1_ES = $arrayTranslation[1]['text'];
+                    $response2_ES = $arrayTranslation[2]['text'];
+                    $response3_ES = $arrayTranslation[3]['text'];
+                
+                
+                
+                
+                    
+                    $html .= '<div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
+                                        
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2ES" class="text" style="flex:20; display: block; text-align:left">
+                                                    '.$response2_ES.'
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2EN" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
+                                                    '.$response2_EN.'
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex1 flexV">
+                                        
+                                            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+
+                                            <img class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
+                                        </div>
+                                        
+                                    </div>';
+
+                                
+
+                    $arrResponse = array('html' => $html, 'token' => $token);
+                    $typechat =   0;
+                    
+                    if(empty($_POST['typechat']) || !isset($_POST['typechat']) ){
+                        $typechat =   0;  
+                        
+                    }else{
+                        $typechat =   intval($_POST['typechat']);   
+                        
+                    }
+			
+                    
+                    $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
+                    $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, 0,  0);
+                    
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+     
+        die();
+        
+    }
+
+    public function bot2()
+    {
+        if (!empty($_POST)) {
+            
+            if(empty($_POST['message']) || empty($_POST['girl'])){
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+                
+            }else{
+              
+              
+                    $message_EN  =  strClean($_POST['message']);
+                   
+                    $html = '';
+
+                  
+                    
+                    if(empty($_POST['token'])){
+                        $token = $this->login($_POST['girl']);
+                        $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
+                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0,0 );
+                
+                        if($token == 'none'){
+                            $this->signup($_POST['girl']);
+                            $token = $this->login($_POST['girl']);
+                        }
+                    }else{
+                        $token = $_POST['token'];
+                       
+                    }
+                    
+                    
+
+                    $words = explode(" ", $message_EN);
+                    $cadena ="";
+                    $html2 = "";
+
+                    $temp =0;
+                $double = true;
+                //dep($words[0]);
+                $cat =  count($words)-1 ;
+               
+
+               
+                    $message_EN = $cadena;           
+                    $response1_EN = "";
+                    $response2_EN = $this->chat2($token, $message_EN);
+                    $response3_EN = "";
+                        
+                    $arrayTranslation = $this->translate(strtolower($message_EN), $response1_EN, $response2_EN, $response3_EN);
+
+                    $message_ES = $arrayTranslation[0]['text'];
+                    $response1_ES = $arrayTranslation[1]['text'];
+                    $response2_ES = $arrayTranslation[2]['text'];
+                    $response3_ES = $arrayTranslation[3]['text'];
+                
+                
+                
+                
+                    
+                    $html .= '<div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
+                                        
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2ES" class="text" style="flex:20; display: block; text-align:left">
+                                                    '.$response2_ES.'
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex1 flexH alingT">
+                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" style="width:5px; margin:15px" />
+                                                
+                                                <div id="answer2EN" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
+                                                    '.$response2_EN.'
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex1 flexV">
+                                        
+                                            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+
+                                            <img class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
+                                        </div>
+                                        
+                                    </div>';
+
+                                
+
+                    $arrResponse = array('html' => $html, 'token' => $token);
+                    $typechat =   0;
+                    
+                    if(empty($_POST['typechat']) || !isset($_POST['typechat']) ){
+                        $typechat =   0;  
+                        
+                    }else{
+                        $typechat =   intval($_POST['typechat']);   
+                        
+                    }
+			
+                    
+                    $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
+                    $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
+                    $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN,0,  0);
+                    
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+     
+        die();
+        
+    }
 
 
     public function signup($name){
@@ -454,6 +893,36 @@ class Icam extends Controllers
 
     public function chat($token, $message){
         $url = "localhost:5001/chat";
+        $ch = curl_init($url);
+
+        $post = array(
+          'question'=>$message);
+
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+                  "question=".$post['question']);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Access-Control-Allow-Credentials: true',
+        'Accept: application/json',
+        'Authorization: Bearer '.$token
+        ));
+
+        $server_output = curl_exec($ch);
+
+        header('Content-Type: text/html');
+
+        $array = json_decode($server_output, true);
+        
+        curl_close ($ch);
+        
+        return $array['Answer'];
+    }
+
+    public function chat2($token, $message){
+        $url = "localhost:5001/chat2";
         $ch = curl_init($url);
 
         $post = array(
