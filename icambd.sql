@@ -230,6 +230,17 @@ respuesta longtext,
 cant int 
 );
 
+create table feelback_fine(
+idfeelback_fine bigint not null auto_increment,
+primary key (idfeelback_fine),
+question longtext,
+answer_bot1 longtext,
+answer_bot2 longtext,
+edit_answer longtext,
+bot1 int,
+bot2 int
+); 
+
 
 
 
