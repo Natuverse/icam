@@ -386,6 +386,52 @@ class Icam extends Controllers
         die();
         
     }
+    
+    
+    public function loadHTML(){
+        echo '
+                <div class="titleBar">
+                    <div id="nameUser" class="bigTitle">'.$_POST['user'].'</div>
+                    <div id="preferences">
+                    </div>
+                </div>
+                <br>
+                <div class="flexH alignT">
+                    <div class="flex1 box">
+                        <div class="titleTag">TRASLATE</div>
+                        <p id="testSpanish">
+                        </p>
+                        <div class="toRight">
+                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
+                        </div>
+                    </div>
+
+                    <div class="flex1 box">
+                        <div class="titleTag">ORIGINAL</div>
+                        <p id="textEnglish">
+                        </p>
+                        <div class="toRight">
+                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
+                        </div>
+                    </div>
+
+                    <div class="flex1">
+                        <div class="backgroundColors">
+                            <div id="titleExpression" class="bigTitle"></div>
+                            <img loading="lazy" id="imageExpression" />
+                            <div id="textExpression" class="text" style="font-size: 12px; font-weight:100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="windowbot1" class="flexH">
+                        
+                </div>
+                
+                <div id="windowbot2" class="flexH">
+                        
+                </div>';
+    }
 
     public function sentimiento()
     {
@@ -407,23 +453,7 @@ class Icam extends Controllers
                     
                     $html = '';
 
-                  
-                    
-                    if(empty($_POST['token'])){
-                        $token = $this->login($_POST['girl']);
-                        $iduser   = $this->model->consultarUsuario($_POST['girl'], 1);
-                        $request_log = $this->model->inserlog($iduser, 1, 0, "","",0,0 );
-                
-                        if($token == 'none'){
-                            $this->signup($_POST['girl']);
-                            $token = $this->login($_POST['girl']);
-                        }
-                    }else{
-                        $token = $_POST['token'];
-                       
-                    }
-                    
-                    
+
 
                     $words = explode(" ", $message_EN);
                     $cadena ="";
@@ -487,7 +517,7 @@ class Icam extends Controllers
                 }
                     $message_EN = $cadena;           
                     $response1_EN = "";
-                    $response2_EN = $this->chat($token, $message_EN);
+                    $response2_EN = "";
                     $response3_EN = "";
                         
                     $arrayTranslation = $this->translate(strtolower($message_EN), $response1_EN, $response2_EN, $response3_EN);
@@ -537,48 +567,15 @@ class Icam extends Controllers
                 
                 
                     
-                    $html .= '<div class="titleBar">
-                                    <div id="nameUser" class="bigTitle">'.$_POST['user'].'</div>
-                                    <div id="preferences">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="flexH alignT">
-                                    <div class="flex1 box">
-                                        <div class="titleTag">TRASLATE</div>
-                                        <p id="testSpanish">
-                                            '.$message_ES.'
-                                        </p>
-                                        <div class="toRight">
-                                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
-                                        </div>
-                                    </div>
-
-                                    <div class="flex1 box">
-                                        <div class="titleTag">ORIGINAL</div>
-                                        <p id="textEnglish">
-                                            '.$html2.'
-                                        </p>
-                                        <div class="toRight">
-                                            <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
-                                        </div>
-                                    </div>
-
-                                    <div class="flex1">
-                                        <div class="backgroundColors">
-                                            <div class="bigTitle">'.$arrSentimiento[$sent]['emocion_es'] .'</div>
-                                            <img id="imageExpression" src="'. media() . '/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image'] .'" title="'.$arrSentimiento[$sent]['emocion_es'].'" />
-                                            <div class="text" style="font-size: 12px; font-weight:100">'.$arrSentimiento[$sent]['descripcion'] .'</div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                    $html .= '
                                
                                ';
 
                                 
-
-                    $arrResponse = array('html' => $html, 'token' => $token);
+                    
+                    $arrResponse = array('testSpanish' => $message_ES, 'textEnglish' => $message_EN,
+                                        'titleExpression' => $arrSentimiento[$sent]['emocion_es'], 'textExpression' => $arrSentimiento[$sent]['descripcion'], 'imageExpression' => media().'/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image']);
+                    /*
                     $typechat =   0;
                     
                     if(empty($_POST['typechat']) || !isset($_POST['typechat']) ){
@@ -593,6 +590,7 @@ class Icam extends Controllers
                     $iduser   = $this->model->consultarUsuario( $_POST['user'], 2);
                     $idwebcam   = $this->model->consultarUsuario($_POST['girl'], 1);                   
                     $request_log = $this->model->inserlog($idwebcam, 2, $iduser,$message_EN , $response2_EN, $arrSentimiento[$sent]['idemocion_image'],  0);
+                    */
                     
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -660,33 +658,34 @@ class Icam extends Controllers
                 
                 
                     
-                    $html .= '<div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
-                                        
-                                            <div class="flex1 flexH alingT">
-                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" style="width:5px; margin:15px" />
-                                                
-                                                <div id="answer2ES" class="text" style="flex:20; display: block; text-align:left">
-                                                    '.$response2_ES.'
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="flex1 flexH alingT">
-                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" style="width:5px; margin:15px" />
-                                                
-                                                <div id="answer2EN" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
-                                                    '.$response2_EN.'
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex1 flexV">
-                                        
-                                            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+                    $html .= '
+                    <div class="flex11 flexV" style="flex:15; align-items: center; justify-content: center;">
 
-                                            <img class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
-                                        </div>
-                                        
-                                    </div>';
+                            <div class="flex1 flexH alingT">
+                                <img class="iconAnswer flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
+
+                                <div id="answer2ES_1" class="text" style="flex:20; display: block; text-align:left">
+                                    '.$response2_ES.'
+                                </div>
+                            </div>
+
+                            <div class="flex1 flexH alingT">
+                                <img class="iconAnswer flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" />
+
+                                <div id="answer2EN_1" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
+                                    '.$response2_EN.'
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex1 flexV">
+
+                            <img id="iconCopy_1" class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+
+                            <img id="iconEdit_1" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
+                        </div>
+
+                    </div>';
 
                                 
 
@@ -773,33 +772,35 @@ class Icam extends Controllers
                 
                 
                     
-                    $html .= '<div class="flexV" style="flex:15; padding-top: 20px; padding-bottom:20px; align-items: center; justify-content: center;">
-                                        
-                                            <div class="flex1 flexH alingT">
-                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" style="width:5px; margin:15px" />
-                                                
-                                                <div id="answer2ES" class="text" style="flex:20; display: block; text-align:left">
-                                                    '.$response2_ES.'
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="flex1 flexH alingT">
-                                                <img class="flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" style="width:5px; margin:15px" />
-                                                
-                                                <div id="answer2EN" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
-                                                    '.$response2_EN.'
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex1 flexV">
-                                        
-                                            <img class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+                    $html .= '
+                    
+                    <div class="flex11 flexV" style="flex:15; align-items: center; justify-content: center;">
 
-                                            <img class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
-                                        </div>
-                                        
-                                    </div>';
+                            <div class="flex1 flexH alingT">
+                                <img class="iconAnswer flex1" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
+
+                                <div id="answer2ES_2" class="text" style="flex:20; display: block; text-align:left">
+                                    '.$response2_ES.'
+                                </div>
+                            </div>
+
+                            <div class="flex1 flexH alingT">
+                                <img class="iconAnswer flex1" src="https://devstec.digital/Assets/images/iconEnglish.png" title="Spanish" />
+
+                                <div id="answer2EN_2" class="text" style="flex:20; font-weight: 100; display: block; text-align:left; color:#d7acff;">
+                                    '.$response2_EN.'
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex1 flexV">
+
+                            <img id="iconCopy_2" class="iconSend" src="https://devstec.digital/Assets/images/btn-send.png" data-text="'.$response2_EN.'" title="Copiar"/>
+
+                            <img id="iconEdit_2" class="iconFeelBack" src="https://devstec.digital/Assets/images/pencil.png" data-response="'.$response2_EN.'" data-translate="'.$response2_ES.'" title="Editar"/>
+                        </div>
+
+                    </div>';
 
                                 
 
