@@ -602,7 +602,7 @@ class Icam extends Controllers
 
                                 
                     
-                    $arrResponse = array('testSpanish' => $message_ES, 'textEnglish' => $message_EN,
+                    $arrResponse = array('testSpanish' => $message_ES, 'textEnglish' => $html2,
                                         'titleExpression' => $arrSentimiento[$sent]['emocion_es'], 'textExpression' => $arrSentimiento[$sent]['descripcion'], 'imageExpression' => media().'/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image']);
                     /*
                     $typechat =   0;
