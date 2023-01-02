@@ -399,7 +399,7 @@ class Icam extends Controllers
                 <div class="flexH alignT">
                     <div class="flex1 box">
                         <div class="titleTag">TRASLATE</div>
-                        <p id="testSpanish">
+                        <p id="testSpanish" style="text-align:left">
                         </p>
                         <div class="toRight">
                             <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconSpanish.png" title="Spanish" />
@@ -408,7 +408,7 @@ class Icam extends Controllers
 
                     <div class="flex1 box">
                         <div class="titleTag">ORIGINAL</div>
-                        <p id="textEnglish">
+                        <p id="textEnglish" style="text-align:left">
                         </p>
                         <div class="toRight">
                             <img class="iconLanguage" src="https://devstec.digital/Assets/images/iconEnglish.png" title="English" />
@@ -430,7 +430,9 @@ class Icam extends Controllers
                 
                 <div id="windowbot2" class="flexH">
                         
-                </div>';
+                </div>
+                
+                <div id="reload" class="button" data-text="">Volver a consultar</div>';
     }
 
     public function sentimiento()
