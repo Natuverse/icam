@@ -17,6 +17,14 @@
 		//private $inttypechat;
 		private $srtquestion;
 		private $srtanswer;
+		private $srtanswerbot1;
+		private $srtanswerbot2;
+		private $srteditanswer;
+		private $intbot1;
+		private $intbot2;
+		
+
+
 		private $intqualification;
 
         
@@ -103,6 +111,36 @@
 					$this->srtquestion,
 					$this->srtanswer,
                     $this->intqualification
+					
+				);
+			
+				$request_insert = $this->insert($query_insert, $arrData);
+				$return = $request_insert;
+			
+			return $return;
+			
+		}
+      
+		public function feelbackFine(String $question,String $answer_bot1,String $answer_bot2, String $edit_answer, Int $bot1, Int $bot2){
+			
+			$this->srtquestion= $question;
+			$this->srtanswerbot1 = $answer_bot1;
+			$this->srtanswerbot2 = $answer_bot2;
+			$this->srteditanswer = $edit_answer;
+			$this->intbot1 = $bot1;
+			$this->intbot2 = $bot2;
+
+			
+		    $query_insert  = "INSERT INTO feelback_fine(question, answer_bot1, answer_bot2, edit_answer,  bot1, bot2)
+				VALUES(?,?,?,?,?,?)";
+				$arrData = array(
+					$this->srtquestion,
+					$this->srtanswerbot1,
+					$this->srtanswerbot2,
+                    $this->srteditanswer,
+                    $this->intbot1,
+                    $this->intbot2
+
 					
 				);
 			

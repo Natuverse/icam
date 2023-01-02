@@ -56,6 +56,33 @@ class Icam extends Controllers
 
     }
 
+    public function feelbackFine(){
+        if (!empty($_POST)) {
+            if(empty($_POST['question']) ){
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+            }else{
+                $question  =  strCleanlive($_POST['question']);
+                $answer_bot1  =  strCleanlive($_POST['answer_bot1']);
+                $answer_bot2  =  strCleanlive($_POST['answer_bot2']);
+                $edit_answer  =  strCleanlive($_POST['edit_answer']);
+                $bot1  =  intval($_POST['bot1']);
+                $bot2  =  intval($_POST['bot2']);
+                              
+                $requestfeelback = $this->model->feelbackFine($question, $answer_bot1, $answer_bot2,   $edit_answer, $bot1,$bot2  );
+                
+                if(!empty($requestfeelback)){
+                    $arrResponse = array('status' => true, 'msg' => 'ok' ); 
+                }else{
+                    $arrResponse = array('status' => false, 'msg' => 'false');
+                  
+                }
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+        die();
+
+    }
+
 	public function chatbot()
     {
         if (!empty($_POST)) {
