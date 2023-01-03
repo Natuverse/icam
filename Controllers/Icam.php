@@ -671,7 +671,7 @@ class Icam extends Controllers
                
 
                
-                    $message_EN = $cadena;           
+                    //$message_EN = $cadena;           
                     $response1_EN = "";
                     $response2_EN = $this->chat($token, $message_EN);
                     $response3_EN = "";
@@ -785,7 +785,7 @@ class Icam extends Controllers
                
 
                
-                    $message_EN = $cadena;           
+                    //$message_EN = $cadena;           
                     $response1_EN = "";
                     $response2_EN = $this->chat2($token, $message_EN);
                     $response3_EN = "";
@@ -954,7 +954,7 @@ class Icam extends Controllers
     public function chat2($token, $message){
         $url = "localhost:5001/chat2";
         $ch = curl_init($url);
-
+        
         $post = array(
           'question'=>$message);
 
