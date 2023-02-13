@@ -600,10 +600,24 @@ class Icam extends Controllers
                                
                                ';
 
-                                
+                    $textExpression = $arrSentimiento[$sent]['descripcion'];
+                    $titleExpression = $arrSentimiento[$sent]['emocion_es'];
+                    $imageExpression = $arrSentimiento[$sent]['emocion_image'];
+                    
+                    if($textExpression == null){
+                    	$textExpression = 'TE EMOCIONA';
+                    }
+                    
+                    if($titleExpression == null){
+                    	$titleExpression = 'SEXUAL';
+                    }
+                    
+                    if($imageExpression == null){
+                    	$imageExpression = 'img_1f0a6cb88fa4bc7547565cfc40ebc169.gif';
+                    }
                     
                     $arrResponse = array('testSpanish' => $message_ES, 'textEnglish' => $html2,
-                                        'titleExpression' => $arrSentimiento[$sent]['emocion_es'], 'textExpression' => $arrSentimiento[$sent]['descripcion'], 'imageExpression' => media().'/images/uploads/emocion/'.$arrSentimiento[$sent]['emocion_image']);
+                                        'titleExpression' => $titleExpression, 'textExpression' => $textExpression, 'imageExpression' => media().'/images/uploads/emocion/'.$imageExpression);
                     /*
                     $typechat =   0;
                     
